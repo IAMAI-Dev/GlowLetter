@@ -1,0 +1,24 @@
+# OpenDesign 原型与过程文件
+opendesign/
+
+# 微信开发者工具本地配置与构建产物
+project.private.config.json
+miniprogram_npm/
+
+# 依赖、构建和测试产物
+node_modules/
+cloudfunctions/**/node_modules/
+dist/
+coverage/
+
+# 本地环境与工具状态
+.agents/
+.codex/
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+__pycache__/
+.DS_Store
+Thumbs.db
