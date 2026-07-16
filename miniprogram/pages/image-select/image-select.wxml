@@ -1,6 +1,6 @@
 <custom-navbar title="选择荧光图片" />
 
-<view class="page no-tabs image-page">
+<view class="page page-enter no-tabs image-page">
   <view>
     <view class="progress-line" aria-label="检测流程第 2 步，共 3 步">
       <view class="progress-step progress-step-done"></view>
@@ -56,3 +56,5 @@
     <button class="btn btn-primary btn-block confirm-button" disabled="{{!hasImage}}" bindtap="confirmImage">确认图片并开始检测</button>
   </view>
 </view>
+
+<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />

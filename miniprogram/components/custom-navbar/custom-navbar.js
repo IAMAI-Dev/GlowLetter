@@ -1,4 +1,5 @@
 const { getLayoutMetrics } = require('../../utils/layout');
+const navigation = require('../../utils/navigation');
 
 Component({
   properties: {
@@ -16,16 +17,17 @@ Component({
 
   methods: {
     handleBack() {
+      const currentPage = navigation.getCurrentPage();
       if (this.properties.backRoute) {
-        wx.reLaunch({ url: this.properties.backRoute });
+        navigation.backOrReset(currentPage, this.properties.backRoute);
         return;
       }
 
       const pages = getCurrentPages();
       if (pages.length > 1) {
-        wx.navigateBack();
+        navigation.navigateBack(currentPage);
       } else {
-        wx.reLaunch({ url: '/pages/home/home' });
+        navigation.redirectTo(currentPage, '/pages/home/home');
       }
     },
 

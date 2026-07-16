@@ -1,4 +1,5 @@
 const store = require('../../utils/store');
+const navigation = require('../../utils/navigation');
 
 Page({
   data: {
@@ -36,7 +37,7 @@ Page({
       success: (response) => {
         if (!response.confirm) return;
         store.deleteRecord(this.data.record.id);
-        wx.reLaunch({ url: '/pages/history/history' });
+        navigation.backOrReset(this, '/pages/history/history');
       }
     });
   },
@@ -53,10 +54,10 @@ Page({
       imageTempPath: '',
       imageMeta: null
     });
-    wx.navigateTo({ url: '/pages/image-select/image-select' });
+    navigation.navigateTo(this, '/pages/image-select/image-select');
   },
 
   returnHistory() {
-    wx.reLaunch({ url: '/pages/history/history' });
+    navigation.backOrReset(this, '/pages/history/history');
   }
 });

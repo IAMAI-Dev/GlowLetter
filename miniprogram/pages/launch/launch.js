@@ -1,3 +1,5 @@
+const navigation = require('../../utils/navigation');
+
 Page({
   data: {
     statusText: '正在识别当前用户',
@@ -23,7 +25,7 @@ Page({
     this.readyTimer = setTimeout(() => {
       this.setData({ statusText: '身份初始化完成' });
       this.routeTimer = setTimeout(() => {
-        wx.reLaunch({ url: '/pages/home/home' });
+        navigation.reLaunch(this, '/pages/home/home');
       }, 420);
     }, 760);
   },
@@ -33,6 +35,6 @@ Page({
   },
 
   enterDemo() {
-    wx.reLaunch({ url: '/pages/home/home' });
+    navigation.reLaunch(this, '/pages/home/home');
   }
 });

@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "填写样品信息",
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "backgroundColor": "#f8f5eb"
 }

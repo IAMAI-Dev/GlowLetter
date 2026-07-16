@@ -1,4 +1,5 @@
 const store = require('../../utils/store');
+const navigation = require('../../utils/navigation');
 
 Page({
   data: {
@@ -48,6 +49,6 @@ Page({
     const draft = Object.assign({}, this.data.draft, { sampleName });
     store.saveDraft(draft);
     this.setData({ draft, nameInvalid: false });
-    wx.navigateTo({ url: '/pages/image-select/image-select' });
+    navigation.navigateTo(this, '/pages/image-select/image-select');
   }
 });

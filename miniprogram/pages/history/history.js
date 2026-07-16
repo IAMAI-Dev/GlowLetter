@@ -1,5 +1,6 @@
 const store = require('../../utils/store');
 const adaptiveTabbar = require('../../utils/adaptive-tabbar');
+const navigation = require('../../utils/navigation');
 
 Page({
   data: {
@@ -64,10 +65,10 @@ Page({
 
   openDetail(event) {
     const id = event.currentTarget.dataset.id;
-    wx.navigateTo({ url: `/pages/history-detail/history-detail?id=${encodeURIComponent(id)}` });
+    navigation.navigateTo(this, `/pages/history-detail/history-detail?id=${encodeURIComponent(id)}`);
   },
 
   startDetection() {
-    wx.navigateTo({ url: '/pages/sample-form/sample-form' });
+    navigation.navigateTo(this, '/pages/sample-form/sample-form');
   }
 });

@@ -1,4 +1,4 @@
-<view class="launch">
+<view class="launch page-enter">
   <view class="brand-mark brand-mark-logo launch-logo" aria-hidden="true">
     <image class="brand-image" src="/assets/images/team-logo.png" mode="aspectFit" />
   </view>
@@ -14,3 +14,5 @@
     <button class="btn btn-secondary btn-block" bindtap="enterDemo">以演示身份进入</button>
   </view>
 </view>
+
+<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />

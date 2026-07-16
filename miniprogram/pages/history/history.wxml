@@ -6,7 +6,7 @@
   bind:action="handleNavbarAction"
 />
 
-<view class="page tab-page history-page">
+<view class="page page-enter tab-page history-page">
   <view>
     <text class="eyebrow">仅显示当前访客的数据</text>
     <view class="row-between history-summary-row">
@@ -63,3 +63,4 @@
 </view>
 
 <custom-tabbar active="history" docked="{{tabbarDocked}}" />
+<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />

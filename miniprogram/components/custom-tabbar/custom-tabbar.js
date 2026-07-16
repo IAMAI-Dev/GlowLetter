@@ -1,3 +1,5 @@
+const navigation = require('../../utils/navigation');
+
 const ROUTES = {
   home: '/pages/home/home',
   history: '/pages/history/history',
@@ -14,7 +16,7 @@ Component({
     handleSelect(event) {
       const key = event.currentTarget.dataset.key;
       if (!ROUTES[key] || key === this.properties.active) return;
-      wx.reLaunch({ url: ROUTES[key] });
+      navigation.redirectTo(navigation.getCurrentPage(), ROUTES[key]);
     }
   }
 });

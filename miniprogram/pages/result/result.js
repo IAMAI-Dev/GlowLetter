@@ -1,4 +1,5 @@
 const store = require('../../utils/store');
+const navigation = require('../../utils/navigation');
 
 Page({
   data: {
@@ -19,7 +20,7 @@ Page({
   },
 
   handleNavbarAction() {
-    wx.navigateTo({ url: '/pages/about/about' });
+    navigation.navigateTo(this, '/pages/about/about');
   },
 
   saveRecord() {
@@ -31,10 +32,10 @@ Page({
 
   restartDetection() {
     store.clearDraftImage();
-    wx.redirectTo({ url: '/pages/sample-form/sample-form' });
+    navigation.redirectTo(this, '/pages/sample-form/sample-form');
   },
 
   returnHome() {
-    wx.reLaunch({ url: '/pages/home/home' });
+    navigation.reLaunch(this, '/pages/home/home');
   }
 });

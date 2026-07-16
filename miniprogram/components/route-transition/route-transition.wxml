@@ -1,0 +1,8 @@
+<view
+  class="route-transition route-transition-{{tone}} {{active ? 'is-active' : ''}}"
+  aria-hidden="true"
+  catch:touchmove="blockTouch"
+>
+  <view class="route-transition-glow"></view>
+  <view class="route-transition-pulse"></view>
+</view>

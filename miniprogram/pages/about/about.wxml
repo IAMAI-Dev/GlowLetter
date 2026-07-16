@@ -1,6 +1,6 @@
 <custom-navbar title="项目说明" />
 
-<view class="page no-tabs about-page">
+<view class="page page-enter no-tabs about-page">
   <view class="top-hero about-hero">
     <text class="eyebrow">iGEM · 萘污染辅助检测</text>
     <text class="heading-1 about-title">从微光到可读的实验线索</text>
@@ -80,3 +80,5 @@
     <button class="btn btn-primary btn-block return-home" bindtap="returnHome">返回首页</button>
   </view>
 </view>
+
+<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />

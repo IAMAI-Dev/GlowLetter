@@ -1,4 +1,5 @@
 const adaptiveTabbar = require('../../utils/adaptive-tabbar');
+const navigation = require('../../utils/navigation');
 
 Page({
   data: {
@@ -31,18 +32,18 @@ Page({
   },
 
   startDetection() {
-    wx.navigateTo({ url: '/pages/sample-form/sample-form' });
+    navigation.navigateTo(this, '/pages/sample-form/sample-form');
   },
 
   openHistory() {
-    wx.reLaunch({ url: '/pages/history/history' });
+    navigation.redirectTo(this, '/pages/history/history');
   },
 
   openAbout() {
-    wx.navigateTo({ url: '/pages/about/about' });
+    navigation.navigateTo(this, '/pages/about/about');
   },
 
   openProfile() {
-    wx.reLaunch({ url: '/pages/profile/profile' });
+    navigation.redirectTo(this, '/pages/profile/profile');
   }
 });

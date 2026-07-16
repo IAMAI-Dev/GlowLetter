@@ -1,3 +1,5 @@
+const navigation = require('../../utils/navigation');
+
 Page({
   data: {
     steps: ['正在读取荧光图像', '正在识别孔板区域', '正在整理检测结果', '即将生成结果'],
@@ -25,7 +27,7 @@ Page({
       this.setData({ activeIndex: index });
     }, index * 380));
     this.timers.push(setTimeout(() => {
-      wx.redirectTo({ url: '/pages/result/result' });
+      navigation.redirectTo(this, '/pages/result/result');
     }, 1640));
   },
 
@@ -34,6 +36,6 @@ Page({
   },
 
   returnToImage() {
-    wx.navigateBack();
+    navigation.navigateBack(this);
   }
 });

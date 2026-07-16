@@ -7,6 +7,17 @@
   z-index: 100;
   background: rgba(248, 245, 235, 0.97);
   color: #07120c;
+  animation: navbar-enter 180ms ease-out both;
+}
+
+@keyframes navbar-enter {
+  from {
+    opacity: 0.2;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .navbar-dark {

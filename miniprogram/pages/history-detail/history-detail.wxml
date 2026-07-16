@@ -6,7 +6,7 @@
   bind:action="handleNavbarAction"
 />
 
-<view class="page no-tabs detail-page">
+<view class="page page-enter no-tabs detail-page">
   <view wx:if="{{hasRecord}}">
     <view class="demo-banner">
       <view class="demo-warning">!</view>
@@ -66,3 +66,5 @@
     <button class="btn btn-primary empty-action" bindtap="returnHistory">返回历史列表</button>
   </view>
 </view>
+
+<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />

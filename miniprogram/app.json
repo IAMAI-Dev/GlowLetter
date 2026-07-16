@@ -19,7 +19,8 @@
   },
   "usingComponents": {
     "custom-navbar": "/components/custom-navbar/custom-navbar",
-    "custom-tabbar": "/components/custom-tabbar/custom-tabbar"
+    "custom-tabbar": "/components/custom-tabbar/custom-tabbar",
+    "route-transition": "/components/route-transition/route-transition"
   },
   "lazyCodeLoading": "requiredComponents",
   "sitemapLocation": "sitemap.json"

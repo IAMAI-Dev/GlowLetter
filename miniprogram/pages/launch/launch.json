@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "正在进入",
   "navigationStyle": "custom",
+  "backgroundColor": "#07120c",
   "disableScroll": true
 }

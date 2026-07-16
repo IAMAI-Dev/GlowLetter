@@ -1,4 +1,5 @@
 const store = require('../../utils/store');
+const navigation = require('../../utils/navigation');
 
 Page({
   data: {
@@ -70,6 +71,6 @@ Page({
 
   confirmImage() {
     if (!this.data.hasImage) return;
-    wx.navigateTo({ url: '/pages/analyzing/analyzing' });
+    navigation.navigateTo(this, '/pages/analyzing/analyzing');
   }
 });

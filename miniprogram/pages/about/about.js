@@ -1,3 +1,5 @@
+const navigation = require('../../utils/navigation');
+
 Page({
   onLoad(options) {
     this.targetSection = options.section || '';
@@ -11,6 +13,6 @@ Page({
   },
 
   returnHome() {
-    wx.reLaunch({ url: '/pages/home/home' });
+    navigation.reLaunch(this, '/pages/home/home');
   }
 });

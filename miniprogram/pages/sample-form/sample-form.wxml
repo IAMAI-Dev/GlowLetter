@@ -1,6 +1,6 @@
 <custom-navbar title="填写样品信息" />
 
-<view class="page no-tabs sample-page">
+<view class="page page-enter no-tabs sample-page">
   <view>
     <view class="progress-line" aria-label="检测流程第 1 步，共 3 步">
       <view class="progress-step progress-step-current"></view>
@@ -62,3 +62,5 @@
     <button class="btn btn-primary btn-block" form-type="submit">下一步：选择图片</button>
   </form>
 </view>
+
+<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />

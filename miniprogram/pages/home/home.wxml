@@ -1,4 +1,4 @@
-<view class="page tab-page home-page">
+<view class="page page-enter tab-page home-page">
   <view class="top-hero home-hero" style="padding-top: calc({{statusBarHeight}}px + 56rpx);">
     <view class="row-between">
       <image class="team-lockup-mark" src="/assets/images/team-logo.png" mode="aspectFit" aria-label="HBU WUJIAN 队伍 Logo" />
@@ -51,3 +51,4 @@
 </view>
 
 <custom-tabbar active="home" docked="{{tabbarDocked}}" />
+<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />

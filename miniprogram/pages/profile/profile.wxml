@@ -1,6 +1,6 @@
 <custom-navbar title="我的" back-route="/pages/home/home" />
 
-<view class="page tab-page profile-page">
+<view class="page page-enter tab-page profile-page">
   <view class="profile-hero">
     <view class="avatar">
       <image class="avatar-image" src="/assets/images/team-logo.png" mode="aspectFit" aria-label="队伍 Logo 默认头像" />
@@ -38,3 +38,4 @@
 </view>
 
 <custom-tabbar active="profile" docked="{{tabbarDocked}}" />
+<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />

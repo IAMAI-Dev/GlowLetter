@@ -1,6 +1,6 @@
 <custom-navbar title="正在整理结果" dark="{{true}}" />
 
-<view class="page page-dark no-tabs analyzing-page">
+<view class="page page-enter page-dark no-tabs analyzing-page">
   <view wx:if="{{!hasError}}">
     <view class="analysis-orbit" aria-hidden="true">
       <view class="analysis-ring"></view>
@@ -32,3 +32,5 @@
     </view>
   </view>
 </view>
+
+<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />

@@ -1,5 +1,6 @@
 const store = require('../../utils/store');
 const adaptiveTabbar = require('../../utils/adaptive-tabbar');
+const navigation = require('../../utils/navigation');
 
 Page({
   data: {
@@ -34,15 +35,15 @@ Page({
   },
 
   openHistory() {
-    wx.reLaunch({ url: '/pages/history/history' });
+    navigation.redirectTo(this, '/pages/history/history');
   },
 
   openAbout() {
-    wx.navigateTo({ url: '/pages/about/about' });
+    navigation.navigateTo(this, '/pages/about/about');
   },
 
   openPrivacy() {
-    wx.navigateTo({ url: '/pages/about/about?section=privacy' });
+    navigation.navigateTo(this, '/pages/about/about?section=privacy');
   },
 
   clearCache() {

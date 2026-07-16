@@ -6,7 +6,7 @@
   bind:action="handleNavbarAction"
 />
 
-<view class="page no-tabs result-page">
+<view class="page page-enter no-tabs result-page">
   <view>
     <view class="demo-banner">
       <view class="demo-warning">!</view>
@@ -72,3 +72,5 @@
     </view>
   </view>
 </view>
+
+<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />
