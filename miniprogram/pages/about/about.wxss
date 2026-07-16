@@ -1,0 +1,45 @@
+.about-page {
+  padding-top: 0;
+}
+
+.about-hero {
+  margin-bottom: 0;
+}
+
+.about-title,
+.about-lead,
+.section-title-desc,
+.timeline-title,
+.timeline-desc,
+.stage-eyebrow,
+.stage-title,
+.stage-lead,
+.privacy-title,
+.privacy-desc,
+.team-desc {
+  display: block;
+}
+
+.stage-version {
+  margin-top: 40rpx;
+  border-color: rgba(248, 245, 235, 0.2);
+  color: rgba(248, 245, 235, 0.7);
+}
+
+.privacy-title {
+  font-weight: 600;
+}
+
+.privacy-desc {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+}
+
+.team-desc {
+  margin-top: 16rpx;
+  font-size: 26rpx;
+}
+
+.return-home {
+  margin-top: 32rpx;
+}

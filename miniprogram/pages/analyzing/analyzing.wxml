@@ -1,0 +1,34 @@
+<custom-navbar title="正在整理结果" dark="{{true}}" />
+
+<view class="page page-dark no-tabs analyzing-page">
+  <view wx:if="{{!hasError}}">
+    <view class="analysis-orbit" aria-hidden="true">
+      <view class="analysis-ring"></view>
+      <view class="analysis-ring-inner"></view>
+      <image class="analysis-image" src="/assets/images/fluorescence-plate-demo.png" mode="aspectFill" />
+    </view>
+    <text class="eyebrow center analysis-eyebrow">演示分析 · 约 1–2 秒</text>
+    <text class="heading-2 center analysis-title">让每一步等待都有解释</text>
+    <view class="analysis-list analysis-steps" aria-live="polite">
+      <view
+        wx:for="{{steps}}"
+        wx:key="*this"
+        class="analysis-step {{index < activeIndex ? 'analysis-step-done' : ''}} {{index === activeIndex ? 'analysis-step-active' : ''}}"
+      >
+        <view class="analysis-dot"></view>
+        <text>{{item}}</text>
+      </view>
+    </view>
+    <view class="notice notice-dark analysis-notice">当前为原型演示流程，尚未接入真实建模公式。</view>
+  </view>
+
+  <view wx:else class="card card-dark analysis-error-card">
+    <text class="eyebrow">处理未完成</text>
+    <text class="heading-2 error-title">演示分析暂时没有响应</text>
+    <text class="lead error-lead">请检查网络后重试，或返回图片选择页重新导入。</text>
+    <view class="button-group">
+      <button class="btn btn-primary" bindtap="retryAnalysis">重新分析</button>
+      <button class="btn btn-secondary" bindtap="returnToImage">返回选择图片</button>
+    </view>
+  </view>
+</view>

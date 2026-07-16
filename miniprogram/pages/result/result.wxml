@@ -1,0 +1,74 @@
+<custom-navbar
+  title="检测结果"
+  back-route="/pages/home/home"
+  action="info"
+  action-label="查看结果说明"
+  bind:action="handleNavbarAction"
+/>
+
+<view class="page no-tabs result-page">
+  <view>
+    <view class="demo-banner">
+      <view class="demo-warning">!</view>
+      <text>演示数据 · 不代表真实检测结论</text>
+    </view>
+    <view class="result-hero">
+      <view class="row-between">
+        <view>
+          <text class="meta result-meta">样品</text>
+          <text class="heading-3 result-sample">{{draft.sampleName || 'A01'}}</text>
+        </view>
+        <text class="meta">{{timeLabel}}</text>
+      </view>
+      <text class="result-number">{{result.concentration}}<text class="result-unit">{{result.unit}}</text></text>
+      <text class="result-caption">{{result.pollutant}} · 模拟浓度</text>
+      <view class="grade-chip">
+        <text class="grade-strong">{{result.gradeCode}} 级</text>
+        <text>·</text>
+        <text>{{result.gradeLabel}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text class="heading-2">荧光图像</text>
+      <text class="section-title-desc">本图仅用于原型展示，未执行真实孔位识别。</text>
+    </view>
+    <view class="preview-frame">
+      <image class="preview-image" src="{{imagePath}}" mode="aspectFill" aria-label="用于演示结果的绿色荧光 96 孔板图片" />
+      <text class="preview-tag">演示图像</text>
+    </view>
+  </view>
+
+  <view class="section section-bordered">
+    <view class="section-title">
+      <text class="heading-2">结果详情</text>
+      <text class="section-title-desc">字段结构已为后续真实模型预留。</text>
+    </view>
+    <view class="card data-list">
+      <view class="data-row"><text class="data-label">模拟浓度区间</text><text class="data-value num">{{result.rangeLabel}}</text></view>
+      <view class="data-row"><text class="data-label">污染档次</text><text class="data-value">{{result.gradeCode}} 级</text></view>
+      <view class="data-row"><text class="data-label">中文等级</text><text class="data-value">{{result.gradeLabel}}</text></view>
+      <view class="data-row"><text class="data-label">数据来源</text><text class="data-value">本地演示服务</text></view>
+      <view class="data-row"><text class="data-label">模型版本</text><text class="data-value num">{{result.modelVersion}}</text></view>
+      <view class="data-row data-row-last"><text class="data-label">建议复测</text><text class="data-value">{{result.retestRecommended ? '是' : '否'}}</text></view>
+    </view>
+  </view>
+
+  <view class="section section-bordered">
+    <view class="section-title"><text class="heading-2">处理建议</text></view>
+    <view class="card"><text>{{result.suggestion}}</text></view>
+    <view class="notice result-notice">本页面用于界面原型演示，当前结果由模拟数据生成，尚未接入真实标准曲线和浓度换算模型。</view>
+  </view>
+
+  <view class="section section-bordered">
+    <view class="button-group result-actions">
+      <button class="btn btn-primary btn-block" disabled="{{saved}}" bindtap="saveRecord">{{saved ? '已保存到历史记录' : '保存演示记录'}}</button>
+      <view class="button-group button-group-two result-secondary-actions">
+        <button class="btn btn-secondary" bindtap="restartDetection">重新检测</button>
+        <button class="btn btn-secondary" bindtap="returnHome">返回首页</button>
+      </view>
+    </view>
+  </view>
+</view>

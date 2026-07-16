@@ -1,0 +1,64 @@
+<custom-navbar title="填写样品信息" />
+
+<view class="page no-tabs sample-page">
+  <view>
+    <view class="progress-line" aria-label="检测流程第 1 步，共 3 步">
+      <view class="progress-step progress-step-current"></view>
+      <view class="progress-step"></view>
+      <view class="progress-step"></view>
+    </view>
+    <text class="eyebrow">步骤 1 / 3</text>
+    <text class="heading-2 intro-title">先为这次检测命名</text>
+    <text class="lead intro-lead">样品名称用于区分历史记录，不会作为科学分析参数。</text>
+  </view>
+
+  <form class="section stack sample-fields" bindsubmit="handleSubmit">
+    <view class="field {{nameInvalid ? 'field-invalid' : ''}}">
+      <text class="field-label">样品名称或编号</text>
+      <input
+        class="input"
+        value="{{draft.sampleName}}"
+        data-field="sampleName"
+        maxlength="40"
+        placeholder="例如 A01"
+        placeholder-class="input-placeholder"
+        bindinput="onInput"
+      />
+      <text class="field-help num">{{nameCount}} / 40</text>
+      <text class="field-error">请填写 1 至 40 个字符的样品名称。</text>
+    </view>
+
+    <view class="field">
+      <text class="field-label">样品备注 <text class="optional">选填</text></text>
+      <textarea
+        class="textarea"
+        value="{{draft.note}}"
+        data-field="note"
+        maxlength="200"
+        auto-height="false"
+        placeholder="记录样品来源或预处理信息"
+        placeholder-class="input-placeholder"
+        bindinput="onInput"
+      ></textarea>
+      <text class="field-help num">{{noteCount}} / 200</text>
+    </view>
+
+    <view class="field">
+      <text class="field-label">孔板编号 <text class="optional">选填</text></text>
+      <input class="input" value="{{draft.plateId}}" data-field="plateId" maxlength="40" placeholder="例如 PLATE-01" placeholder-class="input-placeholder" bindinput="onInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">实验批次 <text class="optional">选填</text></text>
+      <input class="input" value="{{draft.batchId}}" data-field="batchId" maxlength="40" placeholder="例如 2026-07-B1" placeholder-class="input-placeholder" bindinput="onInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">操作人员备注 <text class="optional">选填</text></text>
+      <input class="input" value="{{draft.operatorNote}}" data-field="operatorNote" maxlength="80" placeholder="仅用于本次记录" placeholder-class="input-placeholder" bindinput="onInput" />
+    </view>
+
+    <view class="notice">未提交的内容会暂存在当前设备中。演示版不会采集手机号、位置或真实微信资料。</view>
+    <button class="btn btn-primary btn-block" form-type="submit">下一步：选择图片</button>
+  </form>
+</view>

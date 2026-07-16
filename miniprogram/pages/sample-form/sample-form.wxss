@@ -1,0 +1,16 @@
+.sample-page {
+  padding-top: 8rpx;
+}
+
+.intro-title,
+.intro-lead {
+  display: block;
+}
+
+.sample-fields {
+  margin-top: 10rpx;
+}
+
+.textarea {
+  height: 208rpx;
+}

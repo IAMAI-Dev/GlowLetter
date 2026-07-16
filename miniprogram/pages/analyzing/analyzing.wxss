@@ -1,0 +1,34 @@
+page {
+  background: #07120c;
+}
+
+.analyzing-page {
+  padding-top: 8rpx;
+}
+
+.analysis-eyebrow,
+.analysis-title,
+.error-title,
+.error-lead {
+  display: block;
+}
+
+.analysis-eyebrow {
+  color: rgba(248, 245, 235, 0.52);
+}
+
+.analysis-title {
+  color: #f8f5eb;
+}
+
+.analysis-steps {
+  margin-top: 68rpx;
+}
+
+.analysis-notice {
+  margin-top: 60rpx;
+}
+
+.analysis-error-card {
+  margin-top: 96rpx;
+}

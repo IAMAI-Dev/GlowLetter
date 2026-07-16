@@ -1,0 +1,46 @@
+.result-page {
+  padding-top: 8rpx;
+}
+
+.demo-warning {
+  width: 36rpx;
+  height: 36rpx;
+  border: 3rpx solid #4ee75f;
+  border-radius: 50%;
+  color: #4ee75f;
+  font-family: serif;
+  font-size: 26rpx;
+  font-weight: 700;
+  line-height: 32rpx;
+  text-align: center;
+}
+
+.result-meta,
+.result-sample,
+.result-number,
+.result-caption,
+.section-title-desc {
+  display: block;
+}
+
+.result-sample {
+  margin-top: 8rpx;
+}
+
+.result-caption {
+  margin-top: 20rpx;
+  color: rgba(248, 245, 235, 0.66);
+}
+
+.grade-strong {
+  font-weight: 700;
+}
+
+.result-notice {
+  margin-top: 28rpx;
+}
+
+.result-actions,
+.result-secondary-actions {
+  margin-top: 0;
+}

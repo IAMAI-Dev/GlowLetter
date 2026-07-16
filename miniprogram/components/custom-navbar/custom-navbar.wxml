@@ -1,0 +1,28 @@
+<view class="navbar-placeholder" style="height: {{layout.navTotalHeight}}px;"></view>
+<view class="navbar {{dark ? 'navbar-dark' : ''}}" style="padding-top: {{layout.statusBarHeight}}px;">
+  <view class="navbar-inner" style="height: {{layout.navContentHeight}}px;">
+    <button
+      wx:if="{{showBack}}"
+      class="nav-control nav-back"
+      aria-label="返回上一页"
+      bindtap="handleBack"
+    >
+      <view class="back-chevron"></view>
+    </button>
+    <view class="navbar-title">{{title}}</view>
+    <button
+      wx:if="{{action}}"
+      class="nav-control nav-action"
+      style="margin-right: {{layout.capsuleSafeWidth}}px;"
+      aria-label="{{actionLabel}}"
+      bindtap="handleAction"
+    >
+      <view wx:if="{{action === 'info'}}" class="action-info">i</view>
+      <view wx:elif="{{action === 'refresh'}}" class="action-refresh">↻</view>
+      <view wx:elif="{{action === 'delete'}}" class="action-delete">
+        <view class="delete-lid"></view>
+        <view class="delete-body"></view>
+      </view>
+    </button>
+  </view>
+</view>

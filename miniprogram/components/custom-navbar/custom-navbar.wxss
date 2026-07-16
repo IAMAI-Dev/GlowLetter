@@ -1,0 +1,128 @@
+:host {
+  display: block;
+}
+
+.navbar-placeholder {
+  width: 100%;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: rgba(248, 245, 235, 0.97);
+  color: #07120c;
+}
+
+.navbar-dark {
+  background: rgba(7, 18, 12, 0.97);
+  color: #f8f5eb;
+}
+
+.navbar-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+
+.navbar-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: calc(100% - 320rpx);
+  overflow: hidden;
+  font-size: 34rpx;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+
+.nav-control {
+  width: 88rpx;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+}
+
+.nav-control::after {
+  border: 0;
+}
+
+.nav-control:active {
+  background: rgba(7, 18, 12, 0.06);
+}
+
+.navbar-dark .nav-control:active {
+  background: rgba(248, 245, 235, 0.08);
+}
+
+.nav-action {
+  margin-left: auto;
+}
+
+.back-chevron {
+  width: 24rpx;
+  height: 24rpx;
+  border-bottom: 4rpx solid currentColor;
+  border-left: 4rpx solid currentColor;
+  transform: rotate(45deg);
+}
+
+.action-info {
+  width: 38rpx;
+  height: 38rpx;
+  border: 3rpx solid currentColor;
+  border-radius: 50%;
+  font-family: serif;
+  font-size: 26rpx;
+  font-weight: 700;
+  line-height: 38rpx;
+  text-align: center;
+}
+
+.action-refresh {
+  font-size: 44rpx;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.action-delete {
+  position: relative;
+  width: 38rpx;
+  height: 42rpx;
+}
+
+.delete-lid {
+  position: absolute;
+  top: 3rpx;
+  left: 4rpx;
+  width: 30rpx;
+  height: 4rpx;
+  border-radius: 4rpx;
+  background: currentColor;
+}
+
+.delete-body {
+  position: absolute;
+  top: 12rpx;
+  left: 8rpx;
+  width: 22rpx;
+  height: 26rpx;
+  border: 3rpx solid currentColor;
+  border-top: 0;
+  border-radius: 0 0 5rpx 5rpx;
+}

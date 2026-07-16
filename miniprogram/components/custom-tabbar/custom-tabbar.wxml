@@ -1,0 +1,41 @@
+<view class="tabbar-shell" aria-label="主导航">
+  <view
+    class="tabbar-item {{active === 'home' ? 'is-active' : ''}}"
+    data-key="home"
+    role="button"
+    aria-label="首页"
+    bindtap="handleSelect"
+  >
+    <view class="tab-icon icon-home">
+      <view class="home-roof"></view>
+      <view class="home-body"></view>
+    </view>
+    <text class="tab-label">首页</text>
+  </view>
+  <view
+    class="tabbar-item {{active === 'history' ? 'is-active' : ''}}"
+    data-key="history"
+    role="button"
+    aria-label="历史"
+    bindtap="handleSelect"
+  >
+    <view class="tab-icon icon-history">
+      <view class="clock-hand clock-hour"></view>
+      <view class="clock-hand clock-minute"></view>
+    </view>
+    <text class="tab-label">历史</text>
+  </view>
+  <view
+    class="tabbar-item {{active === 'profile' ? 'is-active' : ''}}"
+    data-key="profile"
+    role="button"
+    aria-label="我的"
+    bindtap="handleSelect"
+  >
+    <view class="tab-icon icon-profile">
+      <view class="profile-head"></view>
+      <view class="profile-shoulder"></view>
+    </view>
+    <text class="tab-label">我的</text>
+  </view>
+</view>

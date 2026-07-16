@@ -1,0 +1,26 @@
+page {
+  background: #07120c;
+}
+
+.launch-logo {
+  margin-bottom: 48rpx;
+}
+
+.launch-eyebrow {
+  margin-bottom: 24rpx;
+  color: rgba(248, 245, 235, 0.46);
+}
+
+.launch-title {
+  color: #f8f5eb;
+}
+
+.launch-lead {
+  display: block;
+  color: rgba(248, 245, 235, 0.64);
+}
+
+.launch-actions {
+  width: 100%;
+  margin-top: 56rpx;
+}

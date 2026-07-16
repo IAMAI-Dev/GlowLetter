@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/launch/launch",
+    "pages/home/home",
+    "pages/sample-form/sample-form",
+    "pages/image-select/image-select",
+    "pages/analyzing/analyzing",
+    "pages/result/result",
+    "pages/history/history",
+    "pages/history-detail/history-detail",
+    "pages/about/about",
+    "pages/profile/profile"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundColor": "#f8f5eb",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": false
+  },
+  "usingComponents": {
+    "custom-navbar": "/components/custom-navbar/custom-navbar",
+    "custom-tabbar": "/components/custom-tabbar/custom-tabbar"
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

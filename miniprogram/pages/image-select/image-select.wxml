@@ -1,0 +1,58 @@
+<custom-navbar title="选择荧光图片" />
+
+<view class="page no-tabs image-page">
+  <view>
+    <view class="progress-line" aria-label="检测流程第 2 步，共 3 步">
+      <view class="progress-step progress-step-done"></view>
+      <view class="progress-step progress-step-current"></view>
+      <view class="progress-step"></view>
+    </view>
+    <text class="eyebrow">步骤 2 / 3</text>
+    <text class="heading-2 intro-title">导入一张孔板图像</text>
+    <text class="lead intro-lead">优先支持 JPG、JPEG 与 PNG。原型暂不连接黑箱摄像头。</text>
+  </view>
+
+  <view class="section">
+    <view wx:if="{{!hasImage}}" class="upload-zone">
+      <view class="upload-content">
+        <view class="upload-picture-icon" aria-hidden="true">
+          <view class="upload-sun"></view>
+          <view class="upload-mountain"></view>
+        </view>
+        <text class="heading-3 upload-title">还没有选择图片</text>
+        <text class="muted upload-desc">你可以从设备中选择，或直接使用演示孔板图。</text>
+        <view class="button-group upload-actions">
+          <button class="btn btn-secondary" bindtap="chooseImage">从设备选择</button>
+          <button class="btn btn-quiet" bindtap="useDemoImage">使用演示图</button>
+        </view>
+      </view>
+    </view>
+
+    <view wx:else>
+      <view class="preview-frame">
+        <image class="preview-image" src="{{imagePath}}" mode="aspectFill" aria-label="已选择的绿色荧光孔板图片预览" />
+        <text class="preview-tag">演示流程</text>
+      </view>
+      <view class="file-meta" aria-label="图片信息">
+        <view class="file-meta-item">
+          <text class="file-meta-label">格式</text>
+          <text class="file-meta-value">{{imageMeta.format}}</text>
+        </view>
+        <view class="file-meta-item">
+          <text class="file-meta-label">尺寸</text>
+          <text class="file-meta-value">{{imageMeta.width}} × {{imageMeta.height}}</text>
+        </view>
+        <view class="file-meta-item">
+          <text class="file-meta-label">大小</text>
+          <text class="file-meta-value">{{imageMeta.size}}</text>
+        </view>
+      </view>
+      <button class="btn btn-quiet btn-block reselect-button" bindtap="chooseImage">重新选择图片</button>
+    </view>
+  </view>
+
+  <view class="section section-bordered image-confirm">
+    <view class="notice">图片仅用于本次原型流程预览。保存记录时才会模拟上传，不会在数据库中保存 base64 内容。</view>
+    <button class="btn btn-primary btn-block confirm-button" disabled="{{!hasImage}}" bindtap="confirmImage">确认图片并开始检测</button>
+  </view>
+</view>

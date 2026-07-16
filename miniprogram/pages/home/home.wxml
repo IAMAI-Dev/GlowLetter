@@ -1,0 +1,53 @@
+<view class="page tab-page home-page">
+  <view class="top-hero home-hero" style="padding-top: calc({{statusBarHeight}}px + 56rpx);">
+    <view class="row-between">
+      <image class="team-lockup-mark" src="/assets/images/team-logo.png" mode="aspectFit" aria-label="HBU WUJIAN 队伍 Logo" />
+      <view class="version-pill">
+        <view class="version-dot"></view>
+        <text>原型演示版</text>
+      </view>
+    </view>
+    <text class="eyebrow home-eyebrow">绿荧来信 · Glow Letter</text>
+    <text class="heading-1 home-title">读取黑箱中的绿色微光</text>
+    <text class="lead home-lead">上传孔板荧光图像，体验萘污染辅助检测的完整演示流程。</text>
+    <view class="hero-visual">
+      <image class="hero-image" src="/assets/images/fluorescence-plate-demo.png" mode="aspectFill" aria-label="黑箱中呈现绿色荧光的 96 孔板演示图" />
+      <view class="hero-caption">
+        <text>96 孔板 · 演示图像</text>
+        <text class="meta hero-meta">尚未接入真实分析</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section home-primary-actions">
+    <view class="button-group home-button-group">
+      <button class="btn btn-primary btn-block" bindtap="startDetection">
+        <text>开始检测</text>
+        <text class="button-arrow">→</text>
+      </button>
+      <button class="btn btn-secondary btn-block" bindtap="openHistory">查看历史记录</button>
+    </view>
+  </view>
+
+  <view class="section section-bordered">
+    <view class="section-title">
+      <text class="heading-2">继续了解</text>
+      <text class="section-title-desc">查看检测原理、开发阶段与个人数据状态。</text>
+    </view>
+    <view class="quick-grid">
+      <view class="quick-card" role="button" aria-label="项目说明" bindtap="openAbout">
+        <view class="quick-symbol quick-symbol-info">i</view>
+        <text class="quick-card-title">项目说明</text>
+      </view>
+      <view class="quick-card" role="button" aria-label="我的" bindtap="openProfile">
+        <view class="quick-symbol quick-symbol-profile">
+          <view class="quick-profile-head"></view>
+          <view class="quick-profile-body"></view>
+        </view>
+        <text class="quick-card-title">我的</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<custom-tabbar active="home" />

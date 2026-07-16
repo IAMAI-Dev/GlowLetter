@@ -1,0 +1,68 @@
+<custom-navbar
+  title="历史详情"
+  back-route="/pages/history/history"
+  action="{{hasRecord ? 'delete' : ''}}"
+  action-label="删除这条记录"
+  bind:action="handleNavbarAction"
+/>
+
+<view class="page no-tabs detail-page">
+  <view wx:if="{{hasRecord}}">
+    <view class="demo-banner">
+      <view class="demo-warning">!</view>
+      <text>历史演示数据 · 只读记录</text>
+    </view>
+    <view class="result-hero">
+      <view class="row-between">
+        <view>
+          <text class="meta detail-meta">样品</text>
+          <text class="heading-3 detail-sample">{{record.sampleName}}</text>
+        </view>
+        <text class="meta">{{timeLabel}}</text>
+      </view>
+      <text class="result-number">{{record.result.concentration}}<text class="result-unit">{{record.result.unit}}</text></text>
+      <text class="detail-caption">{{record.result.pollutant}} · 模拟浓度</text>
+      <view class="grade-chip">
+        <text class="grade-strong">{{record.result.gradeCode}} 级</text>
+        <text>·</text>
+        <text>{{record.result.gradeLabel}}</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="preview-frame">
+        <image class="preview-image" src="{{record.imagePath}}" mode="aspectFill" aria-label="历史记录中的绿色荧光 96 孔板演示图" />
+        <text class="preview-tag">已保存演示图</text>
+      </view>
+    </view>
+
+    <view class="section section-bordered">
+      <view class="section-title">
+        <text class="heading-2">记录信息</text>
+        <text class="section-title-desc">检测结果创建后不可直接修改。</text>
+      </view>
+      <view class="card data-list">
+        <view class="data-row"><text class="data-label">模拟浓度区间</text><text class="data-value num">{{record.result.rangeLabel}}</text></view>
+        <view class="data-row"><text class="data-label">污染档次</text><text class="data-value">{{record.result.gradeCode}} 级 · {{record.result.gradeLabel}}</text></view>
+        <view class="data-row"><text class="data-label">数据来源</text><text class="data-value">本地演示服务</text></view>
+        <view class="data-row"><text class="data-label">模型版本</text><text class="data-value num">{{record.result.modelVersion}}</text></view>
+        <view class="data-row data-row-last"><text class="data-label">处理建议</text><text class="data-value">真实方案待实验组确认</text></view>
+      </view>
+      <view class="notice detail-notice">本记录由模拟数据生成，尚未接入真实标准曲线、浓度换算模型或污染阈值。</view>
+    </view>
+
+    <view class="section section-bordered">
+      <view class="button-group button-group-two detail-actions">
+        <button class="btn btn-primary" bindtap="reuseSample">沿用样品信息</button>
+        <button class="btn btn-secondary" bindtap="returnHistory">返回历史列表</button>
+      </view>
+      <button class="btn btn-danger btn-block delete-button" bindtap="confirmDelete">删除这条记录</button>
+    </view>
+  </view>
+
+  <view wx:else class="empty-state detail-empty">
+    <text class="heading-3 empty-title">没有找到这条记录</text>
+    <text class="muted empty-desc">它可能已被删除，或不属于当前访客。</text>
+    <button class="btn btn-primary empty-action" bindtap="returnHistory">返回历史列表</button>
+  </view>
+</view>

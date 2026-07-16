@@ -1,0 +1,40 @@
+<custom-navbar title="我的" back-route="/pages/home/home" />
+
+<view class="page tab-page profile-page">
+  <view class="profile-hero">
+    <view class="avatar">
+      <image class="avatar-image" src="/assets/images/team-logo.png" mode="aspectFit" aria-label="队伍 Logo 默认头像" />
+    </view>
+    <view class="grow">
+      <text class="heading-2 profile-name">绿荧访客</text>
+      <view class="profile-status">
+        <view class="version-pill"><view class="version-dot"></view><text>身份已初始化</text></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section section-bordered">
+    <view class="card card-dark row-between count-card">
+      <view>
+        <text class="meta count-label">我的检测次数</text>
+        <text class="result-number count-number">{{recordCount}}</text>
+      </view>
+      <button class="btn btn-primary" bindtap="openHistory">查看记录</button>
+    </view>
+  </view>
+
+  <view class="section section-bordered">
+    <view class="section-title"><text class="heading-2">设置与说明</text></view>
+    <view class="menu-list">
+      <button class="menu-item" bindtap="openAbout"><text>关于项目</text><text class="menu-arrow">›</text></button>
+      <button class="menu-item" bindtap="openPrivacy"><text>隐私说明</text><text class="menu-arrow">›</text></button>
+      <button class="menu-item menu-item-last" bindtap="clearCache"><text>清理本地缓存</text><text class="menu-arrow">›</text></button>
+    </view>
+  </view>
+
+  <view class="section section-bordered">
+    <view class="notice">原型不会请求真实昵称或头像。正式版本通过微信云开发识别用户，并由云函数保护私有记录。</view>
+  </view>
+</view>
+
+<custom-tabbar active="profile" />

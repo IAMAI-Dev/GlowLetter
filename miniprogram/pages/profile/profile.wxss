@@ -1,0 +1,29 @@
+.profile-page {
+  padding-top: 8rpx;
+}
+
+.profile-name,
+.count-label,
+.count-number {
+  display: block;
+}
+
+.profile-status {
+  margin-top: 14rpx;
+}
+
+.count-card {
+  min-height: 260rpx;
+}
+
+.count-number {
+  margin-top: 24rpx;
+  font-size: 96rpx;
+}
+
+.menu-arrow {
+  color: #576459;
+  font-size: 44rpx;
+  font-weight: 300;
+  line-height: 1;
+}

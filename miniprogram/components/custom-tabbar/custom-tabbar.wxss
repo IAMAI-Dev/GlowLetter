@@ -1,0 +1,130 @@
+:host {
+  display: block;
+}
+
+.tabbar-shell {
+  position: fixed;
+  z-index: 90;
+  bottom: calc(20rpx + env(safe-area-inset-bottom));
+  left: 50%;
+  width: calc(100% - 96rpx);
+  max-width: 656rpx;
+  height: 124rpx;
+  display: flex;
+  align-items: center;
+  padding: 14rpx 18rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.82);
+  border-radius: 999rpx;
+  background: rgba(244, 252, 239, 0.95);
+  box-shadow: 0 20rpx 52rpx rgba(7, 18, 12, 0.16), inset 0 2rpx 0 rgba(255, 255, 255, 0.74);
+  box-sizing: border-box;
+  transform: translateX(-50%);
+}
+
+.tabbar-item {
+  min-width: 0;
+  height: 96rpx;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+  border-radius: 999rpx;
+  color: #576459;
+  font-size: 22rpx;
+  line-height: 1.2;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.tabbar-item:active {
+  opacity: 0.72;
+}
+
+.tabbar-item.is-active {
+  background: rgba(7, 18, 12, 0.08);
+  color: #07120c;
+}
+
+.tab-icon {
+  position: relative;
+  width: 42rpx;
+  height: 42rpx;
+  color: currentColor;
+}
+
+.tab-label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-roof {
+  position: absolute;
+  top: 4rpx;
+  left: 10rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-top: 3rpx solid currentColor;
+  border-left: 3rpx solid currentColor;
+  transform: rotate(45deg);
+}
+
+.home-body {
+  position: absolute;
+  right: 8rpx;
+  bottom: 3rpx;
+  left: 8rpx;
+  height: 23rpx;
+  border: 3rpx solid currentColor;
+  border-top: 0;
+}
+
+.icon-history {
+  border: 3rpx solid currentColor;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.clock-hand {
+  position: absolute;
+  top: 19rpx;
+  left: 19rpx;
+  height: 3rpx;
+  border-radius: 3rpx;
+  background: currentColor;
+  transform-origin: left center;
+}
+
+.clock-hour {
+  width: 10rpx;
+  transform: rotate(-90deg);
+}
+
+.clock-minute {
+  width: 12rpx;
+  transform: rotate(32deg);
+}
+
+.profile-head {
+  position: absolute;
+  top: 2rpx;
+  left: 13rpx;
+  width: 16rpx;
+  height: 16rpx;
+  border: 3rpx solid currentColor;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.profile-shoulder {
+  position: absolute;
+  right: 5rpx;
+  bottom: 2rpx;
+  left: 5rpx;
+  height: 20rpx;
+  border: 3rpx solid currentColor;
+  border-bottom: 0;
+  border-radius: 24rpx 24rpx 0 0;
+}

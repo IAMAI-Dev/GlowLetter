@@ -1,0 +1,68 @@
+.image-page {
+  padding-top: 8rpx;
+}
+
+.intro-title,
+.intro-lead,
+.upload-title,
+.upload-desc {
+  display: block;
+}
+
+.upload-content {
+  width: 100%;
+}
+
+.upload-picture-icon {
+  position: relative;
+  width: 84rpx;
+  height: 72rpx;
+  margin: 0 auto 32rpx;
+  border: 3rpx solid #576459;
+  border-radius: 12rpx;
+  color: #576459;
+}
+
+.upload-sun {
+  position: absolute;
+  top: 16rpx;
+  left: 20rpx;
+  width: 14rpx;
+  height: 14rpx;
+  border: 3rpx solid currentColor;
+  border-radius: 50%;
+}
+
+.upload-mountain {
+  position: absolute;
+  right: 12rpx;
+  bottom: 13rpx;
+  left: 14rpx;
+  height: 28rpx;
+  border-bottom: 3rpx solid currentColor;
+  border-left: 3rpx solid currentColor;
+  transform: skew(-32deg);
+}
+
+.upload-desc {
+  margin-top: 16rpx;
+  font-size: 28rpx;
+}
+
+.upload-actions {
+  margin-top: 36rpx;
+}
+
+.reselect-button {
+  margin-top: 12rpx;
+}
+
+.confirm-button {
+  margin-top: 32rpx;
+}
+
+.file-meta-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

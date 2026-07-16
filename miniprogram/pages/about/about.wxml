@@ -1,0 +1,82 @@
+<custom-navbar title="项目说明" />
+
+<view class="page no-tabs about-page">
+  <view class="top-hero about-hero">
+    <text class="eyebrow">iGEM · 萘污染辅助检测</text>
+    <text class="heading-1 about-title">从微光到可读的实验线索</text>
+    <text class="lead about-lead">绿荧来信配合避光黑箱与 96 孔板，探索将绿色荧光图像转化为可理解结果的产品流程。</text>
+  </view>
+
+  <view class="section">
+    <view class="section-title">
+      <text class="heading-2">检测构想</text>
+      <text class="section-title-desc">当前只验证流程与信息结构，不执行真实科学计算。</text>
+    </view>
+    <view class="timeline">
+      <view class="timeline-item">
+        <view class="timeline-rail"><view class="timeline-line"></view><view class="timeline-dot"></view></view>
+        <view class="timeline-content"><text class="timeline-title">样品与菌液处理</text><text class="timeline-desc">处理后的液体样品在 96 孔板中孵育。</text></view>
+      </view>
+      <view class="timeline-item">
+        <view class="timeline-rail"><view class="timeline-line"></view><view class="timeline-dot"></view></view>
+        <view class="timeline-content"><text class="timeline-title">避光黑箱拍摄</text><text class="timeline-desc">孔板固定在托盘中，由固定相机采集绿色荧光图像。</text></view>
+      </view>
+      <view class="timeline-item">
+        <view class="timeline-rail"><view class="timeline-line"></view><view class="timeline-dot"></view></view>
+        <view class="timeline-content"><text class="timeline-title">图像与模型接口</text><text class="timeline-desc">未来按固定孔位提取信号，并接入建模组提供的确定性公式。</text></view>
+      </view>
+      <view class="timeline-item timeline-item-last">
+        <view class="timeline-rail"><view class="timeline-dot"></view></view>
+        <view class="timeline-content"><text class="timeline-title">浓度、等级与建议</text><text class="timeline-desc">真实模型完成后再输出经确认的范围、等级与复测规则。</text></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section section-bordered">
+    <view class="card card-dark">
+      <text class="eyebrow stage-eyebrow">当前开发阶段</text>
+      <text class="heading-2 stage-title">界面原型与演示服务</text>
+      <text class="lead stage-lead">已打通样品信息、图片选择、模拟分析、结果展示和历史记录。真实标准曲线、孔位识别与浓度换算仍待团队资料。</text>
+      <view class="version-pill stage-version"><text>demo-v0.1</text></view>
+    </view>
+  </view>
+
+  <view class="section section-bordered">
+    <view class="section-title"><text class="heading-2">使用步骤</text></view>
+    <view class="card data-list">
+      <view class="data-row"><text class="data-label num">01</text><text class="data-value">填写样品名称或编号</text></view>
+      <view class="data-row"><text class="data-label num">02</text><text class="data-value">选择孔板荧光图片</text></view>
+      <view class="data-row"><text class="data-label num">03</text><text class="data-value">启动演示分析流程</text></view>
+      <view class="data-row data-row-last"><text class="data-label num">04</text><text class="data-value">查看并保存演示结果</text></view>
+    </view>
+  </view>
+
+  <view class="section section-bordered" id="privacy">
+    <view class="section-title"><text class="heading-2">数据与隐私</text></view>
+    <view class="stack">
+      <view class="inset-card"><text class="privacy-title">收集什么</text><text class="muted privacy-desc">样品信息、用户选择的图片、演示结果与创建时间。</text></view>
+      <view class="inset-card"><text class="privacy-title">为什么收集</text><text class="muted privacy-desc">用于完成检测流程和展示当前用户自己的历史记录。</text></view>
+      <view class="inset-card"><text class="privacy-title">如何删除</text><text class="muted privacy-desc">可在历史详情删除单条记录，或在个人中心清理本地缓存。</text></view>
+    </view>
+  </view>
+
+  <view class="section section-bordered">
+    <view class="section-title"><text class="heading-2">免责声明</text></view>
+    <view class="notice">当前原型结果由模拟数据生成，尚未接入真实标准曲线、浓度换算模型、污染阈值或处理建议，不可作为实验结论、行业认证或法律依据。</view>
+  </view>
+
+  <view class="section section-bordered">
+    <view class="section-title">
+      <text class="heading-2">团队信息</text>
+      <text class="section-title-desc">队伍标识已更新，成员资料待项目组补充。</text>
+    </view>
+    <view class="card card-dark team-lockup">
+      <image class="team-lockup-mark" src="/assets/images/team-logo.png" mode="aspectFit" aria-label="HBU WUJIAN 队伍 Logo" />
+      <view class="grow">
+        <image class="team-lockup-wordmark" src="/assets/images/team-wordmark.png" mode="widthFix" aria-label="HBU WUJIAN 队伍文字标志" />
+        <text class="muted team-desc">iGEM 萘污染荧光检测项目团队</text>
+      </view>
+    </view>
+    <button class="btn btn-primary btn-block return-home" bindtap="returnHome">返回首页</button>
+  </view>
+</view>

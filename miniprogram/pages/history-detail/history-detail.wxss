@@ -1,0 +1,63 @@
+.detail-page {
+  padding-top: 8rpx;
+}
+
+.demo-warning {
+  width: 36rpx;
+  height: 36rpx;
+  border: 3rpx solid #4ee75f;
+  border-radius: 50%;
+  color: #4ee75f;
+  font-family: serif;
+  font-size: 26rpx;
+  font-weight: 700;
+  line-height: 32rpx;
+  text-align: center;
+}
+
+.detail-meta,
+.detail-sample,
+.detail-caption,
+.section-title-desc,
+.empty-title,
+.empty-desc {
+  display: block;
+}
+
+.detail-sample {
+  margin-top: 8rpx;
+}
+
+.detail-caption {
+  margin-top: 20rpx;
+  color: rgba(248, 245, 235, 0.66);
+}
+
+.grade-strong {
+  font-weight: 700;
+}
+
+.detail-notice {
+  margin-top: 28rpx;
+}
+
+.detail-actions {
+  margin-top: 0;
+}
+
+.delete-button {
+  margin-top: 24rpx;
+}
+
+.detail-empty {
+  margin-top: 104rpx;
+}
+
+.empty-desc {
+  margin-top: 16rpx;
+}
+
+.empty-action {
+  display: inline-flex;
+  margin-top: 40rpx;
+}
