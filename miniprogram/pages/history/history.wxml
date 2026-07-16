@@ -62,4 +62,4 @@
   </view>
 </view>
 
-<custom-tabbar active="history" />
+<custom-tabbar active="history" docked="{{tabbarDocked}}" />

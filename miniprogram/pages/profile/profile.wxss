@@ -12,10 +12,6 @@
   margin-top: 14rpx;
 }
 
-.count-card {
-  min-height: 260rpx;
-}
-
 .count-number {
   margin-top: 24rpx;
   font-size: 96rpx;

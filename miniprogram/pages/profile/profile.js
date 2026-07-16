@@ -1,12 +1,36 @@
 const store = require('../../utils/store');
+const adaptiveTabbar = require('../../utils/adaptive-tabbar');
 
 Page({
   data: {
-    recordCount: 0
+    recordCount: 0,
+    tabbarDocked: false
   },
 
   onShow() {
-    this.setData({ recordCount: store.getRecords().length });
+    this.setData({ recordCount: store.getRecords().length }, () => {
+      adaptiveTabbar.scheduleMeasure(this, true);
+    });
+  },
+
+  onReady() {
+    adaptiveTabbar.scheduleMeasure(this, true);
+  },
+
+  onPageScroll() {
+    adaptiveTabbar.scheduleMeasure(this);
+  },
+
+  onReachBottom() {
+    adaptiveTabbar.setDocked(this, true);
+  },
+
+  onResize() {
+    adaptiveTabbar.scheduleMeasure(this, true);
+  },
+
+  onUnload() {
+    adaptiveTabbar.dispose(this);
   },
 
   openHistory() {

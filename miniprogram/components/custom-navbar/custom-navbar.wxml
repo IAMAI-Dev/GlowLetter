@@ -1,4 +1,3 @@
-<view class="navbar-placeholder" style="height: {{layout.navTotalHeight}}px;"></view>
 <view class="navbar {{dark ? 'navbar-dark' : ''}}" style="padding-top: {{layout.statusBarHeight}}px;">
   <view class="navbar-inner" style="height: {{layout.navContentHeight}}px;">
     <button

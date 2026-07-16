@@ -37,4 +37,4 @@
   </view>
 </view>
 
-<custom-tabbar active="profile" />
+<custom-tabbar active="profile" docked="{{tabbarDocked}}" />

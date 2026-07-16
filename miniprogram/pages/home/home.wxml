@@ -50,4 +50,4 @@
   </view>
 </view>
 
-<custom-tabbar active="home" />
+<custom-tabbar active="home" docked="{{tabbarDocked}}" />

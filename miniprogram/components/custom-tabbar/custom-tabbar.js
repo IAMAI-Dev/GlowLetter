@@ -6,7 +6,8 @@ const ROUTES = {
 
 Component({
   properties: {
-    active: { type: String, value: 'home' }
+    active: { type: String, value: 'home' },
+    docked: { type: Boolean, value: false }
   },
 
   methods: {

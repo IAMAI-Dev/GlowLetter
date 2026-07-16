@@ -1,4 +1,4 @@
-<view class="tabbar-shell" aria-label="主导航">
+<view class="tabbar-shell {{docked ? 'is-docked' : ''}}" aria-label="主导航" data-state="{{docked ? 'docked' : 'floating'}}">
   <view
     class="tabbar-item {{active === 'home' ? 'is-active' : ''}}"
     data-key="home"

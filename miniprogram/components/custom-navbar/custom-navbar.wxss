@@ -2,16 +2,9 @@
   display: block;
 }
 
-.navbar-placeholder {
-  width: 100%;
-}
-
 .navbar {
-  position: fixed;
+  position: relative;
   z-index: 100;
-  top: 0;
-  right: 0;
-  left: 0;
   background: rgba(248, 245, 235, 0.97);
   color: #07120c;
 }
@@ -25,7 +18,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 0 24rpx;
+  padding: 0 32rpx;
   box-sizing: border-box;
 }
 

@@ -1,15 +1,37 @@
 const store = require('../../utils/store');
+const adaptiveTabbar = require('../../utils/adaptive-tabbar');
 
 Page({
   data: {
     records: [],
     total: 0,
     visible: 5,
-    hasMore: false
+    hasMore: false,
+    tabbarDocked: false
   },
 
   onShow() {
     this.loadRecords();
+  },
+
+  onReady() {
+    adaptiveTabbar.scheduleMeasure(this, true);
+  },
+
+  onPageScroll() {
+    adaptiveTabbar.scheduleMeasure(this);
+  },
+
+  onReachBottom() {
+    adaptiveTabbar.setDocked(this, true);
+  },
+
+  onResize() {
+    adaptiveTabbar.scheduleMeasure(this, true);
+  },
+
+  onUnload() {
+    adaptiveTabbar.dispose(this);
   },
 
   onPullDownRefresh() {
@@ -28,7 +50,7 @@ Page({
       records,
       total: allRecords.length,
       hasMore: allRecords.length > records.length
-    });
+    }, () => adaptiveTabbar.scheduleMeasure(this, true));
     if (showToast) wx.showToast({ title: '历史记录已刷新', icon: 'none' });
   },
 
