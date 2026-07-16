@@ -6,10 +6,8 @@
     "pages/image-select/image-select",
     "pages/analyzing/analyzing",
     "pages/result/result",
-    "pages/history/history",
     "pages/history-detail/history-detail",
-    "pages/about/about",
-    "pages/profile/profile"
+    "pages/about/about"
   ],
   "window": {
     "navigationStyle": "custom",

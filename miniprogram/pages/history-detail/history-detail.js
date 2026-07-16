@@ -37,7 +37,7 @@ Page({
       success: (response) => {
         if (!response.confirm) return;
         store.deleteRecord(this.data.record.id);
-        navigation.backOrReset(this, '/pages/history/history');
+        navigation.backOrReset(this, '/pages/home/home?tab=history');
       }
     });
   },
@@ -58,6 +58,6 @@ Page({
   },
 
   returnHistory() {
-    navigation.backOrReset(this, '/pages/history/history');
+    navigation.backOrReset(this, '/pages/home/home?tab=history');
   }
 });

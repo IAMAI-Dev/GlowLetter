@@ -1,10 +1,4 @@
-const navigation = require('../../utils/navigation');
-
-const ROUTES = {
-  home: '/pages/home/home',
-  history: '/pages/history/history',
-  profile: '/pages/profile/profile'
-};
+const TAB_KEYS = ['home', 'history', 'profile'];
 
 Component({
   properties: {
@@ -15,8 +9,8 @@ Component({
   methods: {
     handleSelect(event) {
       const key = event.currentTarget.dataset.key;
-      if (!ROUTES[key] || key === this.properties.active) return;
-      navigation.redirectTo(navigation.getCurrentPage(), ROUTES[key]);
+      if (!TAB_KEYS.includes(key) || key === this.properties.active) return;
+      this.triggerEvent('select', { key });
     }
   }
 });

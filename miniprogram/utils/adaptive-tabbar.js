@@ -16,7 +16,7 @@ function setDocked(page, docked) {
 function measure(page) {
   if (!page) return;
   wx.createSelectorQuery()
-    .select('.tab-page')
+    .select(page.__adaptiveTabbarSelector || '.tab-page')
     .boundingClientRect((rect) => {
       if (!rect) return;
       const atBottom = rect.bottom <= getWindowHeight() + BOTTOM_THRESHOLD_PX;

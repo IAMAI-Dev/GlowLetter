@@ -1,54 +1,196 @@
-<view class="page page-enter tab-page home-page">
-  <view class="top-hero home-hero" style="padding-top: calc({{statusBarHeight}}px + 56rpx);">
-    <view class="row-between">
-      <image class="team-lockup-mark" src="/assets/images/team-logo.png" mode="aspectFit" aria-label="HBU WUJIAN 队伍 Logo" />
-      <view class="version-pill">
-        <view class="version-dot"></view>
-        <text>原型演示版</text>
-      </view>
-    </view>
-    <text class="eyebrow home-eyebrow">绿荧来信 · Glow Letter</text>
-    <text class="heading-1 home-title">读取黑箱中的绿色微光</text>
-    <text class="lead home-lead">上传孔板荧光图像，体验萘污染辅助检测的完整演示流程。</text>
-    <view class="hero-visual">
-      <image class="hero-image" src="/assets/images/fluorescence-plate-demo.png" mode="aspectFill" aria-label="黑箱中呈现绿色荧光的 96 孔板演示图" />
-      <view class="hero-caption">
-        <text>96 孔板 · 演示图像</text>
-        <text class="meta hero-meta">尚未接入真实分析</text>
-      </view>
-    </view>
-  </view>
-
-  <view class="section home-primary-actions">
-    <view class="button-group home-button-group">
-      <button class="btn btn-primary btn-block" bindtap="startDetection">
-        <text>开始检测</text>
-        <text class="button-arrow">→</text>
-      </button>
-      <button class="btn btn-secondary btn-block" bindtap="openHistory">查看历史记录</button>
-    </view>
-  </view>
-
-  <view class="section section-bordered">
-    <view class="section-title">
-      <text class="heading-2">继续了解</text>
-      <text class="section-title-desc">查看检测原理、开发阶段与个人数据状态。</text>
-    </view>
-    <view class="quick-grid">
-      <view class="quick-card" role="button" aria-label="项目说明" bindtap="openAbout">
-        <view class="quick-symbol quick-symbol-info">i</view>
-        <text class="quick-card-title">项目说明</text>
-      </view>
-      <view class="quick-card" role="button" aria-label="我的" bindtap="openProfile">
-        <view class="quick-symbol quick-symbol-profile">
-          <view class="quick-profile-head"></view>
-          <view class="quick-profile-body"></view>
+<view class="main-shell" data-current-tab="{{activeTab}}">
+  <scroll-view
+    class="main-scroll {{activeTab === 'home' ? 'is-active' : ''}}"
+    hidden="{{activeTab !== 'home'}}"
+    scroll-y
+    enhanced="{{true}}"
+    show-scrollbar="{{false}}"
+    lower-threshold="12"
+    bindscroll="handleTabScroll"
+    bindscrolltolower="handleTabScrollToLower"
+  >
+    <view class="page page-enter tab-page home-page {{activeTab === 'home' ? 'tab-page-active' : ''}}">
+      <view class="top-hero home-hero" style="padding-top: calc({{statusBarHeight}}px + 56rpx);">
+        <view class="row-between">
+          <image class="team-lockup-mark" src="/assets/images/team-logo.png" mode="aspectFit" aria-label="HBU WUJIAN 队伍 Logo" />
+          <view class="version-pill">
+            <view class="version-dot"></view>
+            <text>原型演示版</text>
+          </view>
         </view>
-        <text class="quick-card-title">我的</text>
+        <text class="eyebrow home-eyebrow">绿荧来信 · Glow Letter</text>
+        <text class="heading-1 home-title">读取黑箱中的绿色微光</text>
+        <text class="lead home-lead">上传孔板荧光图像，体验萘污染辅助检测的完整演示流程。</text>
+        <view class="hero-visual">
+          <image class="hero-image" src="/assets/images/fluorescence-plate-demo.png" mode="aspectFill" aria-label="黑箱中呈现绿色荧光的 96 孔板演示图" />
+          <view class="hero-caption">
+            <text>96 孔板 · 演示图像</text>
+            <text class="meta hero-meta">尚未接入真实分析</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="section home-primary-actions">
+        <view class="button-group home-button-group">
+          <button class="btn btn-primary btn-block" bindtap="startDetection">
+            <text>开始检测</text>
+            <text class="button-arrow">→</text>
+          </button>
+          <button class="btn btn-secondary btn-block" bindtap="openHistory">查看历史记录</button>
+        </view>
+      </view>
+
+      <view class="section section-bordered">
+        <view class="section-title">
+          <text class="heading-2">继续了解</text>
+          <text class="section-title-desc">查看检测原理、开发阶段与个人数据状态。</text>
+        </view>
+        <view class="quick-grid">
+          <view class="quick-card" role="button" aria-label="项目说明" bindtap="openAbout">
+            <view class="quick-symbol quick-symbol-info">i</view>
+            <text class="quick-card-title">项目说明</text>
+          </view>
+          <view class="quick-card" role="button" aria-label="我的" bindtap="openProfile">
+            <view class="quick-symbol quick-symbol-profile">
+              <view class="quick-profile-head"></view>
+              <view class="quick-profile-body"></view>
+            </view>
+            <text class="quick-card-title">我的</text>
+          </view>
+        </view>
       </view>
     </view>
-  </view>
-</view>
+  </scroll-view>
 
-<custom-tabbar active="home" docked="{{tabbarDocked}}" />
-<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />
+  <scroll-view
+    class="main-scroll {{activeTab === 'history' ? 'is-active' : ''}}"
+    hidden="{{activeTab !== 'history'}}"
+    scroll-y
+    enhanced="{{true}}"
+    show-scrollbar="{{false}}"
+    lower-threshold="12"
+    refresher-enabled="{{true}}"
+    refresher-triggered="{{historyRefreshing}}"
+    bindrefresherrefresh="handleHistoryRefresh"
+    bindscroll="handleTabScroll"
+    bindscrolltolower="handleTabScrollToLower"
+  >
+    <custom-navbar
+      title="历史记录"
+      emit-back="{{true}}"
+      action="refresh"
+      action-label="刷新历史记录"
+      bind:backrequest="showHomeTab"
+      bind:action="handleNavbarAction"
+    />
+
+    <view class="page page-enter tab-page history-page {{activeTab === 'history' ? 'tab-page-active' : ''}}">
+      <view>
+        <text class="eyebrow">仅显示当前访客的数据</text>
+        <view class="row-between history-summary-row">
+          <view class="grow">
+            <text class="heading-2 history-title">检测留痕</text>
+            <text class="lead history-lead">按时间倒序查看已保存的演示记录。</text>
+          </view>
+          <text class="meta"><text class="num">{{total}}</text> 条</text>
+        </view>
+      </view>
+
+      <view class="section">
+        <view wx:if="{{records.length}}" class="record-list">
+          <view
+            wx:for="{{records}}"
+            wx:key="id"
+            class="record-card"
+            data-id="{{item.id}}"
+            role="button"
+            aria-label="查看样品 {{item.sampleName}} 的记录"
+            bindtap="openDetail"
+          >
+            <view class="row-between">
+              <view>
+                <text class="meta record-time">{{item.timeLabel}}</text>
+                <text class="heading-3 record-name">{{item.sampleName}}</text>
+              </view>
+              <text class="tag">演示数据</text>
+            </view>
+            <text class="record-reading">{{item.result.concentration}}<text class="record-unit"> {{item.result.unit}}</text></text>
+            <view class="record-tags">
+              <text class="tag">{{item.result.gradeCode}} 级 · {{item.result.gradeLabel}}</text>
+              <text class="tag">{{item.result.rangeLabel}}</text>
+            </view>
+          </view>
+        </view>
+
+        <view wx:else class="empty-state">
+          <view class="empty-clock" aria-hidden="true">
+            <view class="empty-clock-hour"></view>
+            <view class="empty-clock-minute"></view>
+          </view>
+          <text class="heading-3 empty-title">还没有保存记录</text>
+          <text class="muted empty-desc">完成一次演示检测并保存，记录会出现在这里。</text>
+          <button class="btn btn-primary empty-action" bindtap="startDetection">开始第一次检测</button>
+        </view>
+
+        <button wx:if="{{hasMore}}" class="btn btn-secondary btn-block load-more" bindtap="loadMore">加载更多记录</button>
+      </view>
+
+      <view class="section section-bordered">
+        <view class="notice">正式版本将通过云函数校验用户身份，普通用户只能读取和删除自己的记录。</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <scroll-view
+    class="main-scroll {{activeTab === 'profile' ? 'is-active' : ''}}"
+    hidden="{{activeTab !== 'profile'}}"
+    scroll-y
+    enhanced="{{true}}"
+    show-scrollbar="{{false}}"
+    lower-threshold="12"
+    bindscroll="handleTabScroll"
+    bindscrolltolower="handleTabScrollToLower"
+  >
+    <custom-navbar title="我的" emit-back="{{true}}" bind:backrequest="showHomeTab" />
+
+    <view class="page page-enter tab-page profile-page {{activeTab === 'profile' ? 'tab-page-active' : ''}}">
+      <view class="profile-hero">
+        <view class="avatar">
+          <image class="avatar-image" src="/assets/images/team-logo.png" mode="aspectFit" aria-label="队伍 Logo 默认头像" />
+        </view>
+        <view class="grow">
+          <text class="heading-2 profile-name">绿荧访客</text>
+          <view class="profile-status">
+            <view class="version-pill"><view class="version-dot"></view><text>身份已初始化</text></view>
+          </view>
+        </view>
+      </view>
+
+      <view class="section section-bordered">
+        <view class="card card-dark row-between count-card">
+          <view>
+            <text class="meta count-label">我的检测次数</text>
+            <text class="result-number count-number">{{recordCount}}</text>
+          </view>
+          <button class="btn btn-primary" bindtap="openHistory">查看记录</button>
+        </view>
+      </view>
+
+      <view class="section section-bordered">
+        <view class="section-title"><text class="heading-2">设置与说明</text></view>
+        <view class="menu-list">
+          <button class="menu-item" bindtap="openAbout"><text>关于项目</text><text class="menu-arrow">›</text></button>
+          <button class="menu-item" bindtap="openPrivacy"><text>隐私说明</text><text class="menu-arrow">›</text></button>
+          <button class="menu-item menu-item-last" bindtap="clearCache"><text>清理本地缓存</text><text class="menu-arrow">›</text></button>
+        </view>
+      </view>
+
+      <view class="section section-bordered">
+        <view class="notice">原型不会请求真实昵称或头像。正式版本通过微信云开发识别用户，并由云函数保护私有记录。</view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <custom-tabbar active="{{activeTab}}" docked="{{tabbarDocked}}" bind:select="handleTabChange" />
+  <route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />
+</view>

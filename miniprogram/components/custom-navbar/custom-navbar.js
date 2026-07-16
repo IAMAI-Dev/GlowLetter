@@ -6,6 +6,7 @@ Component({
     title: { type: String, value: '' },
     dark: { type: Boolean, value: false },
     showBack: { type: Boolean, value: true },
+    emitBack: { type: Boolean, value: false },
     backRoute: { type: String, value: '' },
     action: { type: String, value: '' },
     actionLabel: { type: String, value: '' }
@@ -17,6 +18,11 @@ Component({
 
   methods: {
     handleBack() {
+      if (this.properties.emitBack) {
+        this.triggerEvent('backrequest');
+        return;
+      }
+
       const currentPage = navigation.getCurrentPage();
       if (this.properties.backRoute) {
         navigation.backOrReset(currentPage, this.properties.backRoute);

@@ -1,6 +1,6 @@
 <custom-navbar
   title="历史详情"
-  back-route="/pages/history/history"
+  back-route="/pages/home/home?tab=history"
   action="{{hasRecord ? 'delete' : ''}}"
   action-label="删除这条记录"
   bind:action="handleNavbarAction"
