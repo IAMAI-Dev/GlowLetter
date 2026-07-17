@@ -2,7 +2,7 @@
 
 ## 1. 开始开发前
 
-1. 阅读 [README](../README.md)、[PRD](../docx/PRD.md) 和与任务相关的代码。
+1. 阅读 [README](../README.md)、[PRD](PRD.md) 和与任务相关的代码。
 2. 查看 [开发计划](DEVELOPMENT_PLAN.md) 与 [待确认问题](OPEN_QUESTIONS.md)，确认需求没有被阻塞。
 3. 从最新主分支创建短生命周期分支，建议命名为 `feat/<topic>`、`fix/<topic>` 或 `docs/<topic>`。
 4. 保持一次提交只解决一个可独立验收的问题。
@@ -27,7 +27,7 @@ chore: 调整开发者工具共享配置
 - 使用原生小程序 JavaScript、WXML 和 WXSS，不引入 Taro、uni-app、Vue 或 React。
 - 首页、历史、我的保持在 `pages/home/home` 常驻壳层中；自定义底栏不得调用页面路由。
 - 独立页面跳转统一使用 `utils/navigation.js`，不要直接散落调用路由 API。
-- 当前本地数据统一通过 `utils/store.js` 访问。接入云开发后，页面只能调用 `services/`，不得直接读写云数据库。
+- 本地草稿和显式离线记录统一通过 `utils/store.js` 访问；页面只能调用 `services/`，不得直接读写云数据库。
 - 新增颜色、间距和通用状态优先复用 `app.wxss`、`styles/common.wxss` 或公共常量。
 - 模拟结果必须标记 `isDemo: true`，不得补写未经实验组确认的公式、阈值或处理结论。
 
@@ -47,14 +47,15 @@ chore: 调整开发者工具共享配置
 ## 5. 提交前检查
 
 ```powershell
-Get-ChildItem miniprogram -Recurse -Filter *.js |
+Get-ChildItem miniprogram,cloudfunctions -Recurse -Filter *.js |
   ForEach-Object { node --check $_.FullName }
 
-Get-ChildItem miniprogram -Recurse -Filter *.json |
+Get-ChildItem miniprogram,cloudfunctions,cloudbase -Recurse -Filter *.json |
   ForEach-Object {
     node -e "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8'))" $_.FullName
   }
 
+node --test tests/*.test.js
 git diff --check
 git status --short
 ```
@@ -70,11 +71,12 @@ git status --short
 - [ ] 微信开发者工具可编译，控制台无项目代码错误。
 - [ ] 页面返回、主入口切换和安全区布局已检查。
 - [ ] 行为、架构或计划变化已同步更新文档。
-- [ ] 没有提交 `opendesign/`、私有配置、密钥、环境变量或日志。
+- [ ] 没有提交 `opendesign/`、私有配置、环境 ID、密钥、OpenID、环境变量或日志。
 
 ## 7. 文档维护
 
-- 产品需求变化：更新 `docx/PRD.md`。
+- 产品需求变化：更新 `docs/PRD.md`。
+- 阶段交付、限制或后续输入变化：更新 `docs/PROTOTYPE_STATUS.md`。
 - 当前实现或目录变化：更新 `README.md` 和 `docs/ARCHITECTURE.md`。
 - 阶段完成或优先级变化：更新 `docs/DEVELOPMENT_PLAN.md`。
 - 尚未确认且会影响实现的问题：更新 `docs/OPEN_QUESTIONS.md`。

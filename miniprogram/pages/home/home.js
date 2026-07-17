@@ -1,6 +1,8 @@
 const store = require('../../utils/store');
 const adaptiveTabbar = require('../../utils/adaptive-tabbar');
 const navigation = require('../../utils/navigation');
+const detectionService = require('../../services/detection-service');
+const runtimeService = require('../../services/runtime-service');
 
 const MAIN_TABS = ['home', 'history', 'profile'];
 
@@ -11,10 +13,15 @@ Page({
     tabbarDocked: false,
     records: [],
     total: 0,
-    visible: 5,
+    page: 1,
     hasMore: false,
     historyRefreshing: false,
-    recordCount: 0
+    historyLoading: false,
+    historyLoadingMore: false,
+    historyError: '',
+    recordCount: 0,
+    identityLabel: '正在确认身份',
+    cloudMode: false
   },
 
   onLoad(options) {
@@ -25,7 +32,7 @@ Page({
   },
 
   onShow() {
-    this.refreshMainData(() => adaptiveTabbar.scheduleMeasure(this, true));
+    this.refreshMainData({ page: 1 }).finally(() => adaptiveTabbar.scheduleMeasure(this, true));
   },
 
   onReady() {
@@ -51,7 +58,7 @@ Page({
       tabbarDocked: false
     }, () => {
       if (key !== 'home') {
-        this.refreshMainData(() => adaptiveTabbar.scheduleMeasure(this, true));
+        this.refreshMainData({ page: 1 }).finally(() => adaptiveTabbar.scheduleMeasure(this, true));
         return;
       }
       adaptiveTabbar.scheduleMeasure(this, true);
@@ -70,38 +77,70 @@ Page({
     adaptiveTabbar.setDocked(this, true);
   },
 
-  refreshMainData(callback) {
-    const allRecords = store.getRecords();
-    const records = allRecords.slice(0, this.data.visible).map((record) => Object.assign({}, record, {
-      timeLabel: store.formatDate(record.createdAt)
-    }));
+  async refreshMainData(options) {
+    const page = options && options.page || 1;
+    const append = Boolean(options && options.append);
+    if (this.historyRequesting) return false;
+    this.historyRequesting = true;
     this.setData({
-      records,
-      total: allRecords.length,
-      hasMore: allRecords.length > records.length,
-      recordCount: allRecords.length
-    }, callback);
+      historyLoading: !append,
+      historyLoadingMore: append,
+      historyError: ''
+    });
+
+    try {
+      const response = await detectionService.listDetections({ page, pageSize: 5 });
+      const incoming = response.items.map((record) => Object.assign({}, record, {
+        timeLabel: store.formatDate(record.createdAt)
+      }));
+      const records = append ? this.data.records.concat(incoming) : incoming;
+      const cloudMode = runtimeService.isCloudMode();
+      this.setData({
+        records,
+        total: response.total,
+        page,
+        hasMore: response.hasMore,
+        recordCount: response.total,
+        historyLoading: false,
+        historyLoadingMore: false,
+        cloudMode,
+        identityLabel: cloudMode ? '云端身份已初始化' : '离线演示身份'
+      });
+      return true;
+    } catch (error) {
+      console.warn('读取历史记录失败。', error);
+      this.setData({
+        historyLoading: false,
+        historyLoadingMore: false,
+        historyError: error.message || '历史记录加载失败，请重试',
+        cloudMode: runtimeService.isCloudMode(),
+        identityLabel: runtimeService.isCloudMode() ? '云端身份已初始化' : '离线演示身份'
+      });
+      return false;
+    } finally {
+      this.historyRequesting = false;
+    }
   },
 
-  handleHistoryRefresh() {
+  async handleHistoryRefresh() {
     this.setData({ historyRefreshing: true });
-    this.refreshMainData(() => {
-      this.setData({ historyRefreshing: false });
-      adaptiveTabbar.scheduleMeasure(this, true);
-    });
+    await this.refreshMainData({ page: 1 });
+    this.setData({ historyRefreshing: false });
+    adaptiveTabbar.scheduleMeasure(this, true);
   },
 
-  handleNavbarAction() {
-    this.refreshMainData(() => {
-      adaptiveTabbar.scheduleMeasure(this, true);
+  async handleNavbarAction() {
+    const success = await this.refreshMainData({ page: 1 });
+    adaptiveTabbar.scheduleMeasure(this, true);
+    if (success) {
       wx.showToast({ title: '历史记录已刷新', icon: 'none' });
-    });
+    }
   },
 
-  loadMore() {
-    this.setData({ visible: this.data.visible + 5 }, () => {
-      this.refreshMainData(() => adaptiveTabbar.scheduleMeasure(this, true));
-    });
+  async loadMore() {
+    if (!this.data.hasMore || this.data.historyLoadingMore) return;
+    await this.refreshMainData({ page: this.data.page + 1, append: true });
+    adaptiveTabbar.scheduleMeasure(this, true);
   },
 
   openDetail(event) {
@@ -138,13 +177,9 @@ Page({
       success: (response) => {
         if (!response.confirm) return;
         store.clearLocalData();
-        this.setData({
-          records: [],
-          total: 0,
-          visible: 5,
-          hasMore: false,
-          recordCount: 0
-        });
+        if (!runtimeService.isCloudMode()) {
+          this.setData({ records: [], total: 0, page: 1, hasMore: false, recordCount: 0 });
+        }
         wx.showToast({ title: '本地缓存已清理', icon: 'success' });
       }
     });

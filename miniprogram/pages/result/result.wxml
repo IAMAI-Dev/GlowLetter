@@ -50,7 +50,7 @@
       <view class="data-row"><text class="data-label">模拟浓度区间</text><text class="data-value num">{{result.rangeLabel}}</text></view>
       <view class="data-row"><text class="data-label">污染档次</text><text class="data-value">{{result.gradeCode}} 级</text></view>
       <view class="data-row"><text class="data-label">中文等级</text><text class="data-value">{{result.gradeLabel}}</text></view>
-      <view class="data-row"><text class="data-label">数据来源</text><text class="data-value">本地演示服务</text></view>
+      <view class="data-row"><text class="data-label">数据来源</text><text class="data-value">{{dataSourceLabel}}</text></view>
       <view class="data-row"><text class="data-label">模型版本</text><text class="data-value num">{{result.modelVersion}}</text></view>
       <view class="data-row data-row-last"><text class="data-label">建议复测</text><text class="data-value">{{result.retestRecommended ? '是' : '否'}}</text></view>
     </view>
@@ -64,7 +64,8 @@
 
   <view class="section section-bordered">
     <view class="button-group result-actions">
-      <button class="btn btn-primary btn-block" disabled="{{saved}}" bindtap="saveRecord">{{saved ? '已保存到历史记录' : '保存演示记录'}}</button>
+      <view wx:if="{{saveError}}" class="notice result-save-error">{{saveError}}</view>
+      <button class="btn btn-primary btn-block" loading="{{saving}}" disabled="{{saving || saved}}" bindtap="saveRecord">{{saved ? '已保存到历史记录' : (saving ? '正在保存' : '保存演示记录')}}</button>
       <view class="button-group button-group-two result-secondary-actions">
         <button class="btn btn-secondary" bindtap="restartDetection">重新检测</button>
         <button class="btn btn-secondary" bindtap="returnHome">返回首页</button>

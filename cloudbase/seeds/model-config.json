@@ -1,0 +1,11 @@
+{
+  "_id": "future-model-v1",
+  "enabled": false,
+  "status": "pending",
+  "pollutant": "naphthalene",
+  "curveType": "",
+  "parameters": {},
+  "validRange": {},
+  "gradeThresholds": [],
+  "calibrationVersion": ""
+}

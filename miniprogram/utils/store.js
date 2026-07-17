@@ -1,5 +1,6 @@
 const DRAFT_KEY = 'glowletter-draft';
 const RECORDS_KEY = 'glowletter-records';
+const PENDING_ANALYSIS_KEY = 'glowletter-pending-analysis';
 const DEMO_IMAGE = '/assets/images/fluorescence-plate-demo.png';
 
 const DEFAULT_DRAFT = {
@@ -57,6 +58,21 @@ function getDemoResult() {
   return Object.assign({}, DEFAULT_RESULT);
 }
 
+function getPendingAnalysis() {
+  const result = read(PENDING_ANALYSIS_KEY, null);
+  if (!result || result.isDemo !== true) return null;
+  return Object.assign({}, result, { isDemo: true });
+}
+
+function savePendingAnalysis(result) {
+  const normalized = Object.assign({}, DEFAULT_RESULT, result, { isDemo: true });
+  return write(PENDING_ANALYSIS_KEY, normalized);
+}
+
+function clearPendingAnalysis() {
+  wx.removeStorageSync(PENDING_ANALYSIS_KEY);
+}
+
 function getRecords() {
   const records = read(RECORDS_KEY, []);
   return Array.isArray(records) ? records : [];
@@ -72,12 +88,16 @@ function createRecord(payload) {
     plateId: draft.plateId || '',
     batchId: draft.batchId || '',
     operatorNote: draft.operatorNote || '',
-    imagePath: DEMO_IMAGE,
+    imagePath: draft.imageTempPath || DEMO_IMAGE,
+    imageFileId: '',
+    imageSource: draft.imageTempPath === DEMO_IMAGE ? 'demo-asset' : 'local-temp',
+    storageSource: 'local',
     imageMeta: draft.imageMeta || {
       format: 'PNG',
       width: 1536,
       height: 1152,
-      size: '2.1 MB'
+      size: 2202009,
+      sizeLabel: '2.1 MB'
     },
     result,
     status: 'completed',
@@ -101,6 +121,7 @@ function deleteRecord(id) {
 function clearLocalData() {
   wx.removeStorageSync(DRAFT_KEY);
   wx.removeStorageSync(RECORDS_KEY);
+  wx.removeStorageSync(PENDING_ANALYSIS_KEY);
 }
 
 function formatDate(value) {
@@ -116,6 +137,9 @@ module.exports = {
   saveDraft,
   clearDraftImage,
   getDemoResult,
+  getPendingAnalysis,
+  savePendingAnalysis,
+  clearPendingAnalysis,
   getRecords,
   createRecord,
   getRecord,

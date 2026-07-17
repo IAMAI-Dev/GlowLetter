@@ -10,7 +10,7 @@
     <text>{{statusText}}</text>
   </view>
   <view wx:if="{{hasError}}" class="button-group launch-actions">
-    <button class="btn btn-primary btn-block" bindtap="handleRetry">重新尝试</button>
+    <button class="btn btn-primary btn-block" disabled="{{initializing}}" bindtap="handleRetry">重新尝试</button>
     <button class="btn btn-secondary btn-block" bindtap="enterDemo">以演示身份进入</button>
   </view>
 </view>
