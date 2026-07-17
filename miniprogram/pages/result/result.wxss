@@ -44,3 +44,7 @@
 .result-secondary-actions {
   margin-top: 0;
 }
+
+.result-save-error {
+  margin-bottom: 24rpx;
+}

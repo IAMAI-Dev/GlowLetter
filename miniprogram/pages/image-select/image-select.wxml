@@ -22,7 +22,7 @@
         <text class="heading-3 upload-title">还没有选择图片</text>
         <text class="muted upload-desc">你可以从设备中选择，或直接使用演示孔板图。</text>
         <view class="button-group upload-actions">
-          <button class="btn btn-secondary" bindtap="chooseImage">从设备选择</button>
+          <button class="btn btn-secondary" loading="{{selecting}}" disabled="{{selecting}}" bindtap="chooseImage">从设备选择</button>
           <button class="btn btn-quiet" bindtap="useDemoImage">使用演示图</button>
         </view>
       </view>
@@ -44,15 +44,15 @@
         </view>
         <view class="file-meta-item">
           <text class="file-meta-label">大小</text>
-          <text class="file-meta-value">{{imageMeta.size}}</text>
+          <text class="file-meta-value">{{imageMeta.sizeLabel || '未知'}}</text>
         </view>
       </view>
-      <button class="btn btn-quiet btn-block reselect-button" bindtap="chooseImage">重新选择图片</button>
+      <button class="btn btn-quiet btn-block reselect-button" loading="{{selecting}}" disabled="{{selecting}}" bindtap="chooseImage">重新选择图片</button>
     </view>
   </view>
 
   <view class="section section-bordered image-confirm">
-    <view class="notice">图片仅用于本次原型流程预览。保存记录时才会模拟上传，不会在数据库中保存 base64 内容。</view>
+    <view class="notice">图片仅用于本次演示检测；只有点击“保存演示记录”后才会上传云存储，数据库只保存文件 ID 与元数据，不保存 base64。</view>
     <button class="btn btn-primary btn-block confirm-button" disabled="{{!hasImage}}" bindtap="confirmImage">确认图片并开始检测</button>
   </view>
 </view>

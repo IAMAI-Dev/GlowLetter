@@ -36,7 +36,7 @@
     <view class="card card-dark">
       <text class="eyebrow stage-eyebrow">当前开发阶段</text>
       <text class="heading-2 stage-title">界面原型与演示服务</text>
-      <text class="lead stage-lead">已打通样品信息、图片选择、模拟分析、结果展示和历史记录。真实标准曲线、孔位识别与浓度换算仍待团队资料。</text>
+      <text class="lead stage-lead">已接入微信云开发身份、云端演示分析、私有图片存储和个人历史记录。真实标准曲线、孔位识别与浓度换算仍待团队资料。</text>
       <view class="version-pill stage-version"><text>demo-v0.1</text></view>
     </view>
   </view>
@@ -54,9 +54,9 @@
   <view class="section section-bordered" id="privacy">
     <view class="section-title"><text class="heading-2">数据与隐私</text></view>
     <view class="stack">
-      <view class="inset-card"><text class="privacy-title">收集什么</text><text class="muted privacy-desc">样品信息、用户选择的图片、演示结果与创建时间。</text></view>
-      <view class="inset-card"><text class="privacy-title">为什么收集</text><text class="muted privacy-desc">用于完成检测流程和展示当前用户自己的历史记录。</text></view>
-      <view class="inset-card"><text class="privacy-title">如何删除</text><text class="muted privacy-desc">可在历史详情删除单条记录，或在个人中心清理本地缓存。</text></view>
+      <view class="inset-card"><text class="privacy-title">收集什么</text><text class="muted privacy-desc">只有保存记录时，才会上传样品信息、用户选择的图片、演示结果与创建时间；不会获取真实昵称、头像或精确位置。</text></view>
+      <view class="inset-card"><text class="privacy-title">为什么收集</text><text class="muted privacy-desc">用于完成演示检测并跨设备展示当前微信用户自己的历史记录。图片存入私有云存储，数据库只保存文件 ID 与元数据。</text></view>
+      <view class="inset-card"><text class="privacy-title">如何删除</text><text class="muted privacy-desc">可在历史详情删除单条记录及关联云图片；个人中心“清理本地缓存”只删除当前设备的草稿和离线演示数据。</text></view>
     </view>
   </view>
 

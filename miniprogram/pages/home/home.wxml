@@ -97,7 +97,18 @@
       </view>
 
       <view class="section">
-        <view wx:if="{{records.length}}" class="record-list">
+        <view wx:if="{{historyLoading && !records.length}}" class="empty-state">
+          <text class="heading-3 empty-title">正在读取云端记录</text>
+          <text class="muted empty-desc">请稍候，历史记录正在同步。</text>
+        </view>
+
+        <view wx:elif="{{historyError && !records.length}}" class="empty-state">
+          <text class="heading-3 empty-title">历史记录暂时不可用</text>
+          <text class="muted empty-desc">{{historyError}}</text>
+          <button class="btn btn-primary empty-action" bindtap="handleNavbarAction">重新加载</button>
+        </view>
+
+        <view wx:elif="{{records.length}}" class="record-list">
           <view
             wx:for="{{records}}"
             wx:key="id"
@@ -132,11 +143,12 @@
           <button class="btn btn-primary empty-action" bindtap="startDetection">开始第一次检测</button>
         </view>
 
-        <button wx:if="{{hasMore}}" class="btn btn-secondary btn-block load-more" bindtap="loadMore">加载更多记录</button>
+        <view wx:if="{{historyError && records.length}}" class="notice history-error-notice">{{historyError}}</view>
+        <button wx:if="{{hasMore}}" class="btn btn-secondary btn-block load-more" loading="{{historyLoadingMore}}" disabled="{{historyLoadingMore}}" bindtap="loadMore">{{historyLoadingMore ? '正在加载' : '加载更多记录'}}</button>
       </view>
 
       <view class="section section-bordered">
-        <view class="notice">正式版本将通过云函数校验用户身份，普通用户只能读取和删除自己的记录。</view>
+        <view class="notice">{{cloudMode ? '记录由云函数按当前微信身份隔离，普通用户只能读取和删除自己的数据。' : '当前为主动选择的离线演示模式，记录仅保存在这台设备。'}}</view>
       </view>
     </view>
   </scroll-view>
@@ -161,7 +173,7 @@
         <view class="grow">
           <text class="heading-2 profile-name">绿荧访客</text>
           <view class="profile-status">
-            <view class="version-pill"><view class="version-dot"></view><text>身份已初始化</text></view>
+            <view class="version-pill"><view class="version-dot"></view><text>{{identityLabel}}</text></view>
           </view>
         </view>
       </view>
@@ -186,7 +198,7 @@
       </view>
 
       <view class="section section-bordered">
-        <view class="notice">原型不会请求真实昵称或头像。正式版本通过微信云开发识别用户，并由云函数保护私有记录。</view>
+        <view class="notice">{{cloudMode ? '不会请求真实昵称或头像；微信云开发只用当前身份隔离私有记录。' : '离线演示不会上传图片或记录；重新启动后可重试连接云环境。'}}</view>
       </view>
     </view>
   </scroll-view>

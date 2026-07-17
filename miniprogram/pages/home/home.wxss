@@ -180,6 +180,10 @@ page {
   margin-top: 28rpx;
 }
 
+.history-error-notice {
+  margin-top: 28rpx;
+}
+
 .profile-status {
   margin-top: 14rpx;
 }

@@ -20,6 +20,11 @@
     "custom-tabbar": "/components/custom-tabbar/custom-tabbar",
     "route-transition": "/components/route-transition/route-transition"
   },
+  "permission": {
+    "scope.camera": {
+      "desc": "用于拍摄孔板荧光图片并完成演示检测流程"
+    }
+  },
   "lazyCodeLoading": "requiredComponents",
   "sitemapLocation": "sitemap.json"
 }
