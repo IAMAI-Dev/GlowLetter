@@ -1,16 +1,30 @@
+const i18n = require('../utils/i18n');
 const FRIENDLY_ERRORS = [
-  { pattern: /network|request:fail|timeout/i, message: '网络连接异常，请检查网络后重试。' },
-  { pattern: /-501005|function.*not.*exist/i, message: '云函数尚未部署，请联系项目开发者。' },
-  { pattern: /-404011|非法的 env|invalid.*env/i, message: '云开发环境未正确关联当前小程序。' },
-  { pattern: /permission|auth|unauthorized|forbidden/i, message: '当前微信身份没有执行此操作的权限。' }
+  { pattern: /network|request:fail|timeout/i, key: 'networkError' },
+  { pattern: /-501005|function.*not.*exist/i, key: 'functionMissing' },
+  { pattern: /-404011|非法的 env|invalid.*env/i, key: 'environmentError' },
+  { pattern: /permission|auth|unauthorized|forbidden/i, key: 'permissionError' }
 ];
+
+const ERROR_KEYS = {
+  UNAUTHENTICATED: 'permissionError', INVALID_ID: 'recordMissing', NOT_FOUND: 'recordMissing',
+  INVALID_SAMPLE_NAME: 'sampleNameValidation', INVALID_SAMPLE: 'aiInvalidRequest',
+  INVALID_IMAGE_META: 'imageReadRetry', INVALID_FILE_ID: 'permissionError',
+  INVALID_MODE: 'unsafeDemo', IMAGE_DELETE_FAILED: 'deleteError',
+  AI_DISABLED: 'aiDisabled', AI_CONFIG_ERROR: 'aiDisabled', AI_TIMEOUT: 'aiTimeout',
+  AI_UNAVAILABLE: 'aiUnavailable', AI_INVALID_OUTPUT: 'aiInvalidOutput',
+  AI_INVALID_REQUEST: 'aiInvalidRequest', AI_DEMO_ONLY: 'aiDemoOnly',
+  CLOUD_UNAVAILABLE: 'cloudUnavailable'
+};
 
 function createServiceError(error, fallbackMessage) {
   if (error && error.isServiceError) return error;
   const detail = error && (error.errMsg || error.message) ? (error.errMsg || error.message) : String(error || '');
   const matched = FRIENDLY_ERRORS.find((item) => item.pattern.test(detail));
-  const serviceError = new Error(matched ? matched.message : (fallbackMessage || '云服务暂时不可用，请稍后重试。'));
-  serviceError.code = error && (error.errCode || error.code) ? (error.errCode || error.code) : 'CLOUD_SERVICE_ERROR';
+  const code = error && (error.errCode || error.code) || 'CLOUD_SERVICE_ERROR';
+  const key = ERROR_KEYS[code] || (matched && matched.key);
+  const serviceError = new Error(key ? i18n.t(key) : (fallbackMessage || i18n.t('cloudError')));
+  serviceError.code = code;
   serviceError.detail = detail;
   serviceError.isServiceError = true;
   return serviceError;
@@ -21,7 +35,7 @@ function ensureCloudReady() {
   if (!app.globalData.cloudReady || !wx.cloud) {
     throw createServiceError(
       { code: 'CLOUD_UNAVAILABLE', message: app.globalData.cloudUnavailableReason },
-      '当前设备无法连接微信云开发，请重试或进入离线演示。'
+      i18n.t('cloudUnavailable')
     );
   }
 }
@@ -32,7 +46,7 @@ async function callFunction(name, data) {
     const response = await wx.cloud.callFunction({ name, data: data || {} });
     const payload = response && response.result;
     if (!payload || payload.success === false) {
-      throw createServiceError(payload && payload.error, '云端没有返回有效结果，请稍后重试。');
+      throw createServiceError(payload && payload.error, i18n.t('invalidResponse'));
     }
     return payload;
   } catch (error) {

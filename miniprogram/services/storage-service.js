@@ -1,3 +1,4 @@
+const i18n = require('../utils/i18n');
 const store = require('../utils/store');
 const cloudService = require('./cloud-service');
 
@@ -37,7 +38,7 @@ async function uploadDetectionImage(options) {
     if (!response || !response.fileID) throw new Error('uploadFile did not return fileID');
     return { imageFileId: response.fileID, imageSource: 'cloud', uploaded: true };
   } catch (error) {
-    throw cloudService.createServiceError(error, '图片上传失败，请检查网络后重试。');
+    throw cloudService.createServiceError(error, i18n.t('uploadError'));
   }
 }
 
@@ -63,7 +64,7 @@ async function resolveImagePath(record) {
     }
     return file.tempFileURL;
   } catch (error) {
-    throw cloudService.createServiceError(error, '历史图片暂时无法读取，请稍后重试。');
+    throw cloudService.createServiceError(error, i18n.t('historyImageError'));
   }
 }
 

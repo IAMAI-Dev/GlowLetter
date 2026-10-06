@@ -1,7 +1,8 @@
+const i18n = require('../../utils/i18n');
 const { getLayoutMetrics } = require('../../utils/layout');
 const navigation = require('../../utils/navigation');
 
-Component({
+i18n.component({
   properties: {
     title: { type: String, value: '' },
     dark: { type: Boolean, value: false },

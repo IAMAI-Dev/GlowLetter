@@ -37,14 +37,16 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  max-width: calc(100% - 320rpx);
+  max-width: calc(100% - 340rpx);
   overflow: hidden;
-  font-size: 34rpx;
+  font-size: 30rpx;
   font-weight: 600;
   line-height: 1.2;
   text-align: center;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: break-word;
+  max-height: 76rpx;
   transform: translate(-50%, -50%);
 }
 

@@ -3,6 +3,7 @@
 }
 
 .demo-warning {
+  flex-shrink: 0;
   width: 36rpx;
   height: 36rpx;
   border: 3rpx solid #4ee75f;

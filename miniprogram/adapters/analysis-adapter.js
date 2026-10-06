@@ -1,3 +1,4 @@
+const i18n = require('../utils/i18n');
 const store = require('../utils/store');
 const cloudService = require('../services/cloud-service');
 const runtimeService = require('../services/runtime-service');
@@ -12,7 +13,7 @@ async function analyzeDetection(input) {
   }
 
   if (!result || result.isDemo !== true) {
-    throw new Error('演示分析返回了不安全的结果结构');
+    throw new Error(i18n.t('unsafeDemo'));
   }
   return store.savePendingAnalysis(result);
 }

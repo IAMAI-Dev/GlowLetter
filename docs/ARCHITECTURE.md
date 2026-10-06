@@ -1,5 +1,19 @@
 # GlowLetter 当前架构
 
+## 0.3.0 增量（已定版，负责人确认模型调用与本轮验收）
+
+- 新增 `pages/assistant/assistant`，共 9 个页面、11 个产品视图；三项底栏保持原单页壳层结构。
+- `utils/i18n.js` 初始化英文默认值，注入页面和组件词典并订阅语言变更；`resultView` 是显示投影，不修改存储的科学字段或用户文本。
+- AI 回复语言由当前提问决定，与界面语言独立；小程序与云函数各自携带一致的语言判断模块。云端对错语言回复在原预算内纠正，客户端再次校验；历史气泡按实际内容显示语言标签。
+- `services/agent-service.js` 经 `wx.cloud.callFunction` 调用 `explainDetection`；`action=status` 只返回启用状态和服务名称，不返回密钥。
+- 云函数以当前 OpenID 和 `recordId` 查询记录。四个工具只读取该记录、检查字段、读取项目说明、构建报告；模型上下文剔除图片引用与身份字段。
+- 输入为 `recordId, locale, action, message, history`，业务 action 为 `explain/check/report/chat`。成功返回 `reply, reportDraft, missingFields, evidenceFields, source, isDemo, locale, recordId`，失败返回 `success:false,error:{code}`。
+- 首轮强制相应工具，最多三次模型请求；45 秒总模型预算、单次 20 秒，客户端 55 秒截止。离开页面后忽略迟到回复。
+- 本机 `agent-store` 保存最近 20 轮和最新草稿，按用户、模式和记录隔离，总上限 1 MB。打开时先复核访问权；不新增云端聊天集合。
+- 离线只提供 `source=offline-example` 的固定示例；云端故障不自动降级。
+
+配置与验证见 [AI_SETUP.md](AI_SETUP.md)。以下保留 `0.2.0` 基础链路说明，其 7 个云函数之外新增第 8 个 `explainDetection`。
+
 > 本文描述 `0.2.0` 体验版已经运行的实现，不代表 PRD 中所有目标能力均已完成。
 
 ## 1. 技术栈与部署状态

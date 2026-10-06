@@ -61,3 +61,4 @@
   display: inline-flex;
   margin-top: 40rpx;
 }
+.assistant-entry { margin-top: 24rpx; }

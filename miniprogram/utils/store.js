@@ -122,6 +122,7 @@ function clearLocalData() {
   wx.removeStorageSync(DRAFT_KEY);
   wx.removeStorageSync(RECORDS_KEY);
   wx.removeStorageSync(PENDING_ANALYSIS_KEY);
+  require('./agent-store').clearAll();
 }
 
 function formatDate(value) {

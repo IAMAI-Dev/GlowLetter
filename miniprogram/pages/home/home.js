@@ -1,3 +1,4 @@
+const i18n = require('../../utils/i18n');
 const store = require('../../utils/store');
 const adaptiveTabbar = require('../../utils/adaptive-tabbar');
 const navigation = require('../../utils/navigation');
@@ -6,7 +7,7 @@ const runtimeService = require('../../services/runtime-service');
 
 const MAIN_TABS = ['home', 'history', 'profile'];
 
-Page({
+i18n.page({
   data: {
     statusBarHeight: getApp().globalData.layout.statusBarHeight,
     activeTab: 'home',
@@ -20,7 +21,7 @@ Page({
     historyLoadingMore: false,
     historyError: '',
     recordCount: 0,
-    identityLabel: '正在确认身份',
+    identityLabel: i18n.t('confirmingIdentity'),
     cloudMode: false
   },
 
@@ -104,7 +105,7 @@ Page({
         historyLoading: false,
         historyLoadingMore: false,
         cloudMode,
-        identityLabel: cloudMode ? '云端身份已初始化' : '离线演示身份'
+        identityLabel: cloudMode ? i18n.t('cloudIdentity') : i18n.t('offlineIdentity')
       });
       return true;
     } catch (error) {
@@ -112,9 +113,9 @@ Page({
       this.setData({
         historyLoading: false,
         historyLoadingMore: false,
-        historyError: error.message || '历史记录加载失败，请重试',
+        historyError: error.message || i18n.t('historyError'),
         cloudMode: runtimeService.isCloudMode(),
-        identityLabel: runtimeService.isCloudMode() ? '云端身份已初始化' : '离线演示身份'
+        identityLabel: runtimeService.isCloudMode() ? i18n.t('cloudIdentity') : i18n.t('offlineIdentity')
       });
       return false;
     } finally {
@@ -133,7 +134,7 @@ Page({
     const success = await this.refreshMainData({ page: 1 });
     adaptiveTabbar.scheduleMeasure(this, true);
     if (success) {
-      wx.showToast({ title: '历史记录已刷新', icon: 'none' });
+      wx.showToast({ title: i18n.t('historyRefreshed'), icon: 'none' });
     }
   },
 
@@ -168,19 +169,49 @@ Page({
     navigation.navigateTo(this, '/pages/about/about?section=privacy');
   },
 
+  onLocaleChange() {
+    adaptiveTabbar.scheduleMeasure(this, true);
+  },
+
+  chooseLanguage() {
+    wx.showActionSheet({
+      itemList: ['English', '简体中文'],
+      success: (response) => {
+        try { i18n.setLocale(response.tapIndex === 1 ? 'zh-CN' : 'en'); }
+        catch (error) { wx.showToast({ title: i18n.t('localStorageError'), icon: 'none' }); }
+      }
+    });
+  },
+
+  clearAiConversations() {
+    wx.showModal({
+      title: i18n.t('aiClearTitle'), content: i18n.t('aiClearDescription'),
+      confirmText: i18n.t('confirmClear'), cancelText: i18n.t('cancel'),
+      success: (response) => {
+        if (!response.confirm) return;
+        try {
+          require('../../utils/agent-store').clearAll();
+          wx.showToast({ title: i18n.t('aiCleared'), icon: 'none' });
+        } catch (error) { wx.showToast({ title: i18n.t('localStorageError'), icon: 'none' }); }
+      }
+    });
+  },
+
   clearCache() {
     wx.showModal({
-      title: '清理本地缓存？',
-      content: '这会移除当前设备中的表单草稿和演示历史记录，不影响任何真实云端数据。',
-      confirmText: '确认清理',
+      title: i18n.t('clearCacheTitle'),
+      content: i18n.t('clearCacheDescription'),
+      confirmText: i18n.t('confirmClear'),
+      cancelText: i18n.t('cancel'),
       confirmColor: '#8c302d',
       success: (response) => {
         if (!response.confirm) return;
-        store.clearLocalData();
+        try { store.clearLocalData(); }
+        catch (error) { wx.showToast({ title: i18n.t('localStorageError'), icon: 'none' }); return; }
         if (!runtimeService.isCloudMode()) {
           this.setData({ records: [], total: 0, page: 1, hasMore: false, recordCount: 0 });
         }
-        wx.showToast({ title: '本地缓存已清理', icon: 'success' });
+        wx.showToast({ title: i18n.t('cacheCleared'), icon: 'success' });
       }
     });
   }

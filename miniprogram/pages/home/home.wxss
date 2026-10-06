@@ -199,3 +199,4 @@ page {
   font-weight: 300;
   line-height: 1;
 }
+.language-value { flex: none; font-size: 26rpx; color: var(--color-muted); }

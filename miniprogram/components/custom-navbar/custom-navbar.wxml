@@ -3,7 +3,7 @@
     <button
       wx:if="{{showBack}}"
       class="nav-control nav-back"
-      aria-label="返回上一页"
+      aria-label="{{copy.back}}"
       bindtap="handleBack"
     >
       <view class="back-chevron"></view>

@@ -1,3 +1,4 @@
+const i18n = require('../utils/i18n');
 const cloudService = require('./cloud-service');
 const runtimeService = require('./runtime-service');
 
@@ -13,14 +14,14 @@ const DEFAULT_CONFIG = {
 
 async function getAppConfig() {
   if (!runtimeService.isCloudMode()) {
-    return runtimeService.setAppConfig(Object.assign({}, DEFAULT_CONFIG));
+    return runtimeService.setAppConfig(getDefaultConfig());
   }
   const response = await cloudService.callFunction('getAppConfig');
-  return runtimeService.setAppConfig(Object.assign({}, DEFAULT_CONFIG, response.config));
+  return runtimeService.setAppConfig(Object.assign({}, DEFAULT_CONFIG, response.config, { disclaimer: i18n.t('demoDisclaimer') }));
 }
 
 function getDefaultConfig() {
-  return Object.assign({}, DEFAULT_CONFIG);
+  return Object.assign({}, DEFAULT_CONFIG, { disclaimer: i18n.t('demoDisclaimer') });
 }
 
 module.exports = {

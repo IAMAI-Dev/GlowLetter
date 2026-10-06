@@ -1,3 +1,4 @@
+const i18n = require('../utils/i18n');
 const store = require('../utils/store');
 const cloudService = require('./cloud-service');
 const runtimeService = require('./runtime-service');
@@ -33,7 +34,7 @@ function normalizeRecord(record) {
     id: record.id || record._id,
     storageSource: record.storageSource || 'cloud',
     imagePath: record.imagePath || (!record.imageFileId ? store.DEMO_IMAGE : ''),
-    dataSourceLabel: record.storageSource === 'local' ? '本地演示服务' : '云端演示服务'
+    dataSourceLabel: record.storageSource === 'local' ? i18n.t('localSource') : i18n.t('cloudSource')
   });
 }
 
@@ -114,11 +115,16 @@ async function getDetection(id) {
 }
 
 async function deleteDetection(id) {
+  let result;
   if (!runtimeService.isCloudMode()) {
     store.deleteRecord(id);
-    return { deleted: true };
+    result = { deleted: true };
+  } else {
+    result = await cloudService.callFunction('deleteDetection', { id });
   }
-  return cloudService.callFunction('deleteDetection', { id });
+  try { require('../utils/agent-store').remove(id); }
+  catch (error) { result.cacheClearFailed = true; }
+  return result;
 }
 
 function getPendingAnalysis() {

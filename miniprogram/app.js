@@ -1,3 +1,4 @@
+const i18n = require('./utils/i18n');
 const { getLayoutMetrics } = require('./utils/layout');
 
 App({
@@ -11,8 +12,9 @@ App({
   },
 
   onLaunch() {
+    i18n.init();
     if (!wx.cloud) {
-      this.globalData.cloudUnavailableReason = '当前微信基础库不支持云开发能力';
+      this.globalData.cloudUnavailableReason = i18n.t('unsupportedCloud');
       return;
     }
 
@@ -20,7 +22,7 @@ App({
       wx.cloud.init({ traceUser: true });
       this.globalData.cloudReady = true;
     } catch (error) {
-      this.globalData.cloudUnavailableReason = '云开发初始化失败';
+      this.globalData.cloudUnavailableReason = i18n.t('cloudInitError');
       console.warn('云开发初始化失败，请在启动页重试或主动进入离线演示。', error);
     }
   }

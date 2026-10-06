@@ -90,7 +90,7 @@ test('记录创建失败时清理刚上传的孤儿图片', async () => {
       imageTempPath: 'wxfile://tmp-image.jpg',
       imageMeta: { width: 100, height: 100, format: 'JPG', size: 1000 }
     }
-  }), /网络连接异常/);
+  }), /Connection failed/);
   assert.equal(deletedFileID, 'cloud://env.bucket/detection-images/openid-test-user/file.jpg');
 });
 

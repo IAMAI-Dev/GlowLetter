@@ -1,6 +1,7 @@
+const i18n = require('../../utils/i18n');
 const TAB_KEYS = ['home', 'history', 'profile'];
 
-Component({
+i18n.component({
   properties: {
     active: { type: String, value: 'home' },
     docked: { type: Boolean, value: false }

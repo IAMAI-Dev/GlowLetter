@@ -1,0 +1,60 @@
+<custom-navbar title="{{copy.aiTitle}}" back-route="/pages/home/home?tab=history" />
+<view class="assistant-shell" style="height: calc(100vh - {{navHeight}}px - {{keyboardHeight}}px);">
+  <scroll-view class="assistant-scroll" scroll-y enhanced="{{true}}" scroll-into-view="{{lastMessageId}}" scroll-with-animation>
+    <view class="assistant-content">
+      <view wx:if="{{loading}}" class="empty-state"><text>{{copy.readingRecord}}</text></view>
+      <view wx:elif="{{loadError}}" class="empty-state">
+        <text class="heading-3">{{copy.recordUnavailable}}</text>
+        <text class="block muted">{{loadError}}</text>
+        <button class="btn btn-primary" bindtap="loadRecord">{{copy.reload}}</button>
+      </view>
+      <block wx:elif="{{record}}">
+        <view class="assistant-record">
+          <text class="eyebrow">{{copy.aiSubtitle}}</text>
+          <text class="heading-2 assistant-sample">{{record.sampleName}}</text>
+          <view class="record-meta"><text>{{timeLabel}}</text><text>{{record.result.modelVersion}}</text></view>
+        </view>
+        <view class="notice assistant-notice">{{offline ? copy.aiOffline : copy.aiDisclosure}}</view>
+        <text wx:if="{{providerLabel && !offline}}" class="meta provider-label">{{copy.aiProvider}}: {{providerLabel}}</text>
+        <text class="assistant-intro">{{offline ? copy.aiOfflineHelp : copy.aiIntro}}</text>
+        <view class="task-list">
+          <button class="task-button" disabled="{{busy || (!offline && !enabled)}}" data-action="explain" bindtap="runTask"><text class="task-mark">↳</text>{{copy.aiExplain}}</button>
+          <button class="task-button" disabled="{{busy || (!offline && !enabled)}}" data-action="check" bindtap="runTask"><text class="task-mark">✓</text>{{copy.aiCheck}}</button>
+          <button class="task-button" disabled="{{busy || (!offline && !enabled)}}" data-action="report" bindtap="runTask"><text class="task-mark">≡</text>{{copy.aiReport}}</button>
+        </view>
+        <view wx:if="{{!offline && !enabled}}" class="notice">
+          <text>{{copy.aiDisabled}}</text>
+          <button class="btn btn-quiet" bindtap="loadRecord">{{copy.retry}}</button>
+        </view>
+        <view class="conversation">
+          <view wx:for="{{messages}}" wx:key="index" id="message-{{index}}" class="message message-{{item.role}}">
+            <view class="message-header"><text>{{item.role === 'user' ? copy.aiYou : (item.source === 'offline-example' ? copy.aiOffline : copy.aiReply)}}</text><text>{{item.role === 'user' ? (item.contentLocale === 'en' ? copy.aiEnglishQuestion : copy.aiChineseQuestion) : (item.contentLocale === 'en' ? copy.aiEnglish : copy.aiChinese)}}</text></view>
+            <text class="message-text" selectable>{{item.displayContent}}</text>
+            <text wx:if="{{item.evidenceLabel}}" class="message-evidence">{{copy.aiEvidence}}: {{item.evidenceLabel}}</text>
+            <button wx:if="{{item.role === 'assistant'}}" class="copy-button" data-index="{{index}}" bindtap="copyMessage">{{copy.aiCopy}}</button>
+          </view>
+          <view wx:if="{{pendingQuestion}}" id="pending-message" class="message message-user"><text class="message-text" selectable>{{pendingQuestion}}</text></view>
+          <view wx:if="{{busy}}" class="assistant-wait" aria-live="polite"><view class="waiting-dot"></view><text>{{copy.aiThinking}}</text></view>
+        </view>
+        <view wx:if="{{reportDraft}}" class="report-draft">
+          <text class="eyebrow">{{copy.aiReportLabel}} · {{reportLocale === 'en' ? copy.aiEnglish : copy.aiChinese}}</text>
+          <text class="message-text report-text" selectable>{{reportDraft}}</text>
+          <button class="btn btn-secondary btn-block" bindtap="copyReport">{{copy.aiCopyReport}}</button>
+        </view>
+        <view wx:if="{{error}}" class="notice assistant-error" aria-live="polite">
+          <text>{{error}}</text><button wx:if="{{canRetry}}" class="btn btn-quiet" disabled="{{busy}}" bindtap="retryRequest">{{copy.aiRetry}}</button>
+        </view>
+        <view wx:if="{{cacheWarning}}" class="notice">{{cacheWarning}}</view>
+        <text class="meta context-hint">{{copy.aiRecentContext}}</text>
+        <button wx:if="{{messages.length || reportDraft}}" class="btn btn-quiet btn-block" disabled="{{busy}}" bindtap="clearConversation">{{copy.aiClear}}</button>
+      </block>
+    </view>
+  </scroll-view>
+  <view wx:if="{{record && !offline}}" class="composer {{keyboardHeight ? 'composer-keyboard' : ''}}">
+    <view class="composer-field">
+      <textarea class="composer-input" style="height: {{inputHeight}}px;" value="{{input}}" focus="{{inputFocused}}" placeholder="{{copy.aiInput}}" aria-label="{{copy.aiInput}}" maxlength="1000" adjust-position="{{false}}" show-confirm-bar="{{false}}" confirm-type="return" disabled="{{busy || !enabled}}" bindinput="onInput" bindfocus="onInputFocus" bindlinechange="onInputLineChange" bindkeyboardheightchange="onKeyboardHeight" bindblur="onInputBlur" />
+    </view>
+    <button class="btn btn-primary send-button" loading="{{busy}}" disabled="{{busy || !enabled || !input}}" bindtap="sendMessage">{{copy.aiSend}}</button>
+  </view>
+</view>
+<route-transition active="{{routeTransitioning}}" tone="{{routeTransitionTone || 'light'}}" />

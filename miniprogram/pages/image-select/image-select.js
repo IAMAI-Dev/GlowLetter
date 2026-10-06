@@ -1,8 +1,9 @@
+const i18n = require('../../utils/i18n');
 const store = require('../../utils/store');
 const navigation = require('../../utils/navigation');
 const imageSourceAdapter = require('../../adapters/image-source-adapter');
 
-Page({
+i18n.page({
   data: {
     hasImage: false,
     imagePath: '',
@@ -29,11 +30,11 @@ Page({
       this.setData({ hasImage: true, imagePath: selected.path, imageMeta: selected.imageMeta });
       store.saveDraft({ imageTempPath: selected.path, imageMeta: selected.imageMeta });
       if (selected.imageMeta.size > 10485760) {
-        wx.showToast({ title: '图片较大，上传可能需要较长时间', icon: 'none' });
+        wx.showToast({ title: i18n.t('largeImage'), icon: 'none' });
       }
     } catch (error) {
       if (error.code !== 'CHOOSE_CANCELLED') {
-        wx.showToast({ title: error.message || '无法读取这张图片', icon: 'none' });
+        wx.showToast({ title: error.message || i18n.t('imageReadError'), icon: 'none' });
       }
     } finally {
       this.setData({ selecting: false });

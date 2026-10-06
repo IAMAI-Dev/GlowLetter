@@ -1,6 +1,7 @@
+const i18n = require('../../utils/i18n');
 const navigation = require('../../utils/navigation');
 
-Page({
+i18n.page({
   onLoad(options) {
     this.targetSection = options.section || '';
   },

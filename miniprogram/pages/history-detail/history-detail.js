@@ -1,8 +1,9 @@
+const i18n = require('../../utils/i18n');
 const store = require('../../utils/store');
 const navigation = require('../../utils/navigation');
 const detectionService = require('../../services/detection-service');
 
-Page({
+i18n.page({
   data: {
     hasRecord: false,
     record: null,
@@ -33,7 +34,7 @@ Page({
         hasRecord: false,
         record: null,
         loading: false,
-        loadError: error.message || '记录暂时无法读取，请重试'
+        loadError: error.message || i18n.t('recordError')
       });
     }
   },
@@ -45,20 +46,22 @@ Page({
   confirmDelete() {
     if (!this.data.record || this.data.deleting) return;
     wx.showModal({
-      title: '删除这条记录？',
-      content: '删除后无法恢复。云端记录会连同关联图片一并删除；离线演示记录只会从本机删除。',
-      confirmText: '确认删除',
+      title: i18n.t('deleteTitle'),
+      content: i18n.t('deleteDescription'),
+      confirmText: i18n.t('confirmDelete'),
+      cancelText: i18n.t('cancel'),
       confirmColor: '#8c302d',
       success: async (response) => {
         if (!response.confirm) return;
         this.setData({ deleting: true });
         try {
-          await detectionService.deleteDetection(this.data.record.id);
+          const result = await detectionService.deleteDetection(this.data.record.id);
+          if (result.cacheClearFailed) wx.showToast({ title: i18n.t('aiDeleteCacheError'), icon: 'none' });
           navigation.backOrReset(this, '/pages/home/home?tab=history');
         } catch (error) {
           console.warn('删除历史记录失败。', error);
           this.setData({ deleting: false });
-          wx.showToast({ title: error.message || '删除失败，请重试', icon: 'none' });
+          wx.showToast({ title: error.message || i18n.t('deleteError'), icon: 'none' });
         }
       }
     });
@@ -77,6 +80,11 @@ Page({
       imageMeta: null
     });
     navigation.navigateTo(this, '/pages/image-select/image-select');
+  },
+
+  openAssistant() {
+    if (!this.data.record || this.data.deleting) return;
+    navigation.navigateTo(this, `/pages/assistant/assistant?id=${encodeURIComponent(this.data.record.id)}`);
   },
 
   returnHistory() {

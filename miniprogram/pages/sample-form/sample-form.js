@@ -1,7 +1,8 @@
+const i18n = require('../../utils/i18n');
 const store = require('../../utils/store');
 const navigation = require('../../utils/navigation');
 
-Page({
+i18n.page({
   data: {
     draft: store.getDraft(),
     nameCount: 0,
@@ -42,7 +43,7 @@ Page({
     const sampleName = this.data.draft.sampleName.trim();
     if (!sampleName) {
       this.setData({ nameInvalid: true });
-      wx.showToast({ title: '请填写样品名称', icon: 'none' });
+      wx.showToast({ title: i18n.t('enterSampleName'), icon: 'none' });
       return;
     }
 

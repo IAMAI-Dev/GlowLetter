@@ -1,10 +1,11 @@
+const i18n = require('../../utils/i18n');
 const navigation = require('../../utils/navigation');
 const store = require('../../utils/store');
 const analysisAdapter = require('../../adapters/analysis-adapter');
 
-Page({
+i18n.page({
   data: {
-    steps: ['正在读取荧光图像', '正在识别孔板区域', '正在整理检测结果', '即将生成结果'],
+    steps: [i18n.t('readingImage'), i18n.t('preparingDemo'), i18n.t('organizingResults'), i18n.t('resultsReady')],
     activeIndex: 0,
     hasError: false
   },

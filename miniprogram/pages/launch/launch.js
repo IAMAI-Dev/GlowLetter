@@ -1,10 +1,11 @@
+const i18n = require('../../utils/i18n');
 const navigation = require('../../utils/navigation');
 const authService = require('../../services/auth-service');
 const configService = require('../../services/config-service');
 
-Page({
+i18n.page({
   data: {
-    statusText: '正在识别当前用户',
+    statusText: i18n.t('identifyUser'),
     hasError: false,
     initializing: false
   },
@@ -24,24 +25,24 @@ Page({
   async startInitialization() {
     if (this.data.initializing) return;
     this.clearTimers();
-    this.setData({ statusText: '正在识别当前用户', hasError: false, initializing: true });
+    this.setData({ statusText: i18n.t('identifyUser'), hasError: false, initializing: true });
     try {
       await authService.initialize();
-      this.setData({ statusText: '正在读取云端配置' });
+      this.setData({ statusText: i18n.t('readConfig') });
       try {
         await configService.getAppConfig();
       } catch (error) {
         console.warn('读取云端配置失败，使用安全默认配置。', error);
         getApp().globalData.appConfig = configService.getDefaultConfig();
       }
-      this.setData({ statusText: '身份初始化完成' });
+      this.setData({ statusText: i18n.t('identityReady') });
       this.routeTimer = setTimeout(() => {
         navigation.reLaunch(this, '/pages/home/home');
       }, 420);
     } catch (error) {
       console.warn('访客身份初始化失败。', error);
       this.setData({
-        statusText: error.message || '身份初始化失败，请重试',
+        statusText: error.message || i18n.t('identityError'),
         hasError: true,
         initializing: false
       });

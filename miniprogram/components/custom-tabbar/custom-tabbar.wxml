@@ -1,41 +1,41 @@
-<view class="tabbar-shell {{docked ? 'is-docked' : ''}}" aria-label="主导航" data-state="{{docked ? 'docked' : 'floating'}}">
+<view class="tabbar-shell {{docked ? 'is-docked' : ''}}" aria-label="{{copy.mainNavigation}}" data-state="{{docked ? 'docked' : 'floating'}}">
   <view
     class="tabbar-item {{active === 'home' ? 'is-active' : ''}}"
     data-key="home"
     role="button"
-    aria-label="首页"
+    aria-label="{{copy.home}}"
     bindtap="handleSelect"
   >
     <view class="tab-icon icon-home">
       <view class="home-roof"></view>
       <view class="home-body"></view>
     </view>
-    <text class="tab-label">首页</text>
+    <text class="tab-label">{{copy.home}}</text>
   </view>
   <view
     class="tabbar-item {{active === 'history' ? 'is-active' : ''}}"
     data-key="history"
     role="button"
-    aria-label="历史"
+    aria-label="{{copy.history}}"
     bindtap="handleSelect"
   >
     <view class="tab-icon icon-history">
       <view class="clock-hand clock-hour"></view>
       <view class="clock-hand clock-minute"></view>
     </view>
-    <text class="tab-label">历史</text>
+    <text class="tab-label">{{copy.history}}</text>
   </view>
   <view
     class="tabbar-item {{active === 'profile' ? 'is-active' : ''}}"
     data-key="profile"
     role="button"
-    aria-label="我的"
+    aria-label="{{copy.profile}}"
     bindtap="handleSelect"
   >
     <view class="tab-icon icon-profile">
       <view class="profile-head"></view>
       <view class="profile-shoulder"></view>
     </view>
-    <text class="tab-label">我的</text>
+    <text class="tab-label">{{copy.profile}}</text>
   </view>
 </view>

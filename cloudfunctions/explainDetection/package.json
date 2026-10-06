@@ -1,0 +1,8 @@
+{
+  "name": "explain-detection",
+  "version": "0.3.0",
+  "private": true,
+  "main": "index.js",
+  "engines": { "node": "18.15" },
+  "dependencies": { "wx-server-sdk": "3.0.1" }
+}

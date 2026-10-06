@@ -1,6 +1,7 @@
+const i18n = require('../utils/i18n');
 function formatByteSize(byteSize) {
   const size = Number(byteSize) || 0;
-  if (!size) return '未知';
+  if (!size) return i18n.t('unknown');
   return `${(size / 1048576).toFixed(1)} MB`;
 }
 
@@ -8,7 +9,7 @@ function chooseRawImage() {
   return new Promise((resolve, reject) => {
     const fail = (error) => {
       const message = error && error.errMsg || '';
-      const normalized = new Error(/cancel/i.test(message) ? '已取消选择图片' : '无法选择这张图片');
+      const normalized = new Error(/cancel/i.test(message) ? i18n.t('imageChooseCancelled') : i18n.t('imageChooseError'));
       normalized.code = /cancel/i.test(message) ? 'CHOOSE_CANCELLED' : 'CHOOSE_FAILED';
       normalized.detail = message;
       reject(normalized);
@@ -59,7 +60,7 @@ function readImageInfo(file) {
         });
       },
       fail: (error) => {
-        const normalized = new Error('无法读取这张图片，请重新选择');
+        const normalized = new Error(i18n.t('imageReadRetry'));
         normalized.code = 'IMAGE_READ_FAILED';
         normalized.detail = error && error.errMsg;
         reject(normalized);

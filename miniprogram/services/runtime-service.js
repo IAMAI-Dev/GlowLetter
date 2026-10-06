@@ -1,3 +1,4 @@
+const i18n = require('../utils/i18n');
 const CLOUD_MODE = 'cloud';
 const OFFLINE_DEMO_MODE = 'offline-demo';
 
@@ -24,7 +25,7 @@ function useOfflineDemo() {
   const app = getApplication();
   app.globalData.runtimeMode = OFFLINE_DEMO_MODE;
   app.globalData.user = {
-    displayName: '离线演示访客',
+    displayName: i18n.t('offlineVisitor'),
     role: 'user',
     isOffline: true
   };
